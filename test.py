@@ -1,5 +1,6 @@
 from ics import Calendar
 
+
 def parse_ics(file_path):
     with open(file_path, 'r') as file:
         calendar = Calendar(file.read())
@@ -16,6 +17,7 @@ def parse_ics(file_path):
         events_info.append(event_info)
 
     return events_info
+
 
 # Example usage
 file_path = 'Fall2023.ics'

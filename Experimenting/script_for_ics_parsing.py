@@ -25,3 +25,4 @@ event_details = parse_ics(file_path)
 for detail in event_details:
     print(detail['summary'])
     print(detail['start'])
+    print(detail['end'])

@@ -1,0 +1,4 @@
+1. Create a virtual environment in Python version 3.11.5
+2. Navigate to this directory in your terminal
+3. Activate the virtual environment
+4. Run the command pip install -r requirements.txt

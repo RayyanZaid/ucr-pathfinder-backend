@@ -30,6 +30,7 @@ def saveScheduleToFirebase(userID : str , schedule : List[Course]) -> None:
 def inputSchedule(userID : str , file_content : str):
 
     print(file_content)
+    print(userID)
     schedule : List[Course] = parseICS(fileContent=file_content)
 
     saveScheduleToFirebase(userID=userID, schedule=schedule)

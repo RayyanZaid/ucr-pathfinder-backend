@@ -1,5 +1,5 @@
 from typing import List
-from Course import Course
+from ScheduleScreen.Course import Course
 
 
 
@@ -12,6 +12,8 @@ def parseICS(fileContent : str) -> List[Course]:
     # Rreturns a list of Course objects
 
     print()
+
+    return []
 
 
 # Rayyan -- Persistence Layer (Database Access)
@@ -27,6 +29,7 @@ def saveScheduleToFirebase(userID : str , schedule : List[Course]) -> None:
 # This is the main function
 def inputSchedule(userID : str , file_content : str):
 
+    print(file_content)
     schedule : List[Course] = parseICS(fileContent=file_content)
 
     saveScheduleToFirebase(userID=userID, schedule=schedule)

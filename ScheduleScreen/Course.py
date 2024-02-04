@@ -32,3 +32,18 @@ class Course:
         # }
         
         self.timeInfo = timeInfo
+
+
+
+    def returnDictionaryForFirebase(self) -> dict:
+
+
+        courseDictionary = {
+            "className" : self.className,
+            "courseNumber" : self.courseNumber,
+            "teacherName" : self.teacherName,
+            "locationInfo" : self.locationInfo,
+            "timeInfo" : self.timeInfo
+        }
+
+        return courseDictionary

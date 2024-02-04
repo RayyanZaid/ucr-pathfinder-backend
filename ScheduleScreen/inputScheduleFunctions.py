@@ -2,8 +2,8 @@ from typing import List
 from ScheduleScreen.Course import Course
 from datetime import datetime
 
-import firebase_admin
-from firebase_admin import credentials, firestore, auth
+from firebase import db
+
 
 
 # William -- Business Layer (Modifying the input data)
@@ -24,11 +24,19 @@ def saveScheduleToFirebase(userID : str , schedule : List[Course]) -> None:
 
     # Takes in the userID and schedule. Saves the schedule to the user's document in Firebase
 
+    firebaseScheduleField : List[dict] = []
+    for eachCourse in schedule:
 
-    db = firestore.client()
+        dictionaryForEachCourse = eachCourse.returnDictionaryForFirebase()
+
+        firebaseScheduleField.append(dictionaryForEachCourse)
+
 
     doc_ref = db.collection("students").document(userID)
-    doc_ref.set({"schedule" : schedule})
+
+
+
+    doc_ref.set({"schedule" : firebaseScheduleField})
     print()
 
 

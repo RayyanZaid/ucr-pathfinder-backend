@@ -24,7 +24,7 @@ def uploadSchedule():
     # Start
     
     file_content = file.read()
-    
+
     inputScheduleFunctions.inputSchedule(userID=uid, file_content=file_content)
     
 

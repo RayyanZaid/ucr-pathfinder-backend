@@ -1,20 +1,26 @@
 from typing import List
+import icalendar
 from ScheduleScreen.Course import Course
 
 
 
 # William -- Business Layer (Modifying the input data)
-
+# Takes in the .ics file content as a string.
+# Rreturns a list of Course objects
 def parseICS(fileContent : str) -> List[Course]:
-
-    # Takes in the .ics file content as a string.
-
-    # Rreturns a list of Course objects
-
-    print()
-
+    calendar = icalendar.Calendar.from_ical(fileContent)
+    for event in calendar.walk('VEVENT'):
+        print(event.get("SUMMARY") + "\n")
+        print("Start Time and End Time: ")
+        print(event.get("DTSTART"))
+        print(event.get("DTEND"))
+        print()
+        print("Times per Week: ")
+        print(event.get("RRULE"))
+        print()
+        print(event.get("LOCATION"))
+        print("-------------------------------------------\n")
     return []
-
 
 # Rayyan -- Persistence Layer (Database Access)
 def saveScheduleToFirebase(userID : str , schedule : List[Course]) -> None:

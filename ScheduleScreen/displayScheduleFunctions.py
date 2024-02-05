@@ -25,6 +25,7 @@ def getSchedule(uid):
 
 
     scheduleDictionary = getCurrentDayClasses(scheduleDictionary)
+    scheduleDictionary = orderByTime(scheduleDictionary)
     return scheduleDictionary
 
 
@@ -41,7 +42,8 @@ numberToDay = {
 }
 def getCurrentDayClasses(scheduleDictionary):
 
-    todaysDayNumber = datetime.today().weekday()
+    todaysDayNumber = 3 # For debugging
+    # todaysDayNumber = datetime.today().weekday()
 
     todaysDayName = numberToDay[todaysDayNumber]
     # Display all classes that have BYDAYs on 'todays_day_number'
@@ -72,3 +74,9 @@ def getCurrentDayClasses(scheduleDictionary):
     
     return scheduleDictionary
 
+
+def orderByTime(scheduleDictionary):
+
+    sortedCourses = sorted(scheduleDictionary, key=lambda x: x['timeInfo']['startTime'])
+
+    return sortedCourses

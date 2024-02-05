@@ -30,8 +30,13 @@ def uploadSchedule():
 
     return jsonify({'message': 'File successfully uploaded'}), 200
 
+@app.route('/displaySchedule', methods= ['GET'])
 
+def getScheduleInfo():
 
+    if request.method == "GET":
+
+        print("YAY")
 
 @app.route('/')
 def hello_world():

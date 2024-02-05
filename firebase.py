@@ -12,5 +12,5 @@ db = firestore.client()
 
 # print(db)
 
-doc_ref = db.collection("users").document("rzaid")
-doc_ref.set({"first": "Rayyan", "last": "Zaid", "born": 2003})
+# doc_ref = db.collection("users").document("rzaid")
+# doc_ref.set({"first": "Rayyan", "last": "Zaid", "born": 2003})

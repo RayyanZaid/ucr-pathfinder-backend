@@ -87,22 +87,22 @@ def inputSchedule(userID : str , file_content : str):
     # DESCRIPTION:CRN: 26876\nCredit Hours: 4.0\nLevel: Undergraduate\nInstructor: Zhao\, Zhijia (Primary) \n
     # END:VEVENT
 
-    locationInfo = {
-        "buildingName" : "Bourns Hall",
-        "roomNumber" : "A125",
-        "geoLocation" : [1,2]
-    }
+    # locationInfo = {
+    #     "buildingName" : "Bourns Hall",
+    #     "roomNumber" : "A125",
+    #     "geoLocation" : [1,2]
+    # }
 
-    timeInfo = {
-        "dateStart" : datetime(2023,9,28),
-        "dateEnd" : datetime(2023,12,8),
-        "daysOfWeek" : ["Tuesday" , "Thursday"],
-        "startTime" : "20:00",
-        "endTime" : "21:20"
-    }
-    course : Course = Course("COMPILER DESIGN", "CS 152", "Zhao, Zhijia", locationInfo, timeInfo)
+    # timeInfo = {
+    #     "dateStart" : datetime(2023,9,28),
+    #     "dateEnd" : datetime(2023,12,8),
+    #     "daysOfWeek" : ["Tuesday" , "Thursday"],
+    #     "startTime" : "20:00",
+    #     "endTime" : "21:20"
+    # }
+    # course : Course = Course("COMPILER DESIGN", "CS 152", "Zhao, Zhijia", locationInfo, timeInfo)
 
-    schedule = [course, course]  
+    # schedule = [course, course]  
     userID = "rayyanzaid0401@gmail.com" 
     saveScheduleToFirebase(userID=userID, schedule=schedule)
 

@@ -2,7 +2,7 @@ from firebase import db
 
 import pytz
 from datetime import datetime
-
+from copy import deepcopy
 def getSchedule(uid):
 
     uid = "rayyanzaid0401@gmail.com"
@@ -23,10 +23,21 @@ def getSchedule(uid):
     else:
         print("No doc")
 
+    
+    scheduleDictionaryArray = []
 
-    scheduleDictionary = getCurrentDayClasses(scheduleDictionary)
-    scheduleDictionary = orderByTime(scheduleDictionary)
-    return scheduleDictionary
+    tempScheduleDictionary = {}
+    for i in range(5):
+        tempScheduleDictionary = deepcopy(scheduleDictionary)
+        tempScheduleDictionary = getCurrentDayClasses(tempScheduleDictionary, i)
+        tempScheduleDictionary = orderByTime(tempScheduleDictionary)
+        scheduleDictionaryArray.append(tempScheduleDictionary)
+
+    
+
+    todaysDayNumber = datetime.today().weekday()
+
+    return scheduleDictionaryArray, todaysDayNumber
 
 
 # 0 -- Monday
@@ -40,18 +51,17 @@ numberToDay = {
     3 : "TH",
     4 : "FR", 
 }
-def getCurrentDayClasses(scheduleDictionary):
+def getCurrentDayClasses(tempScheduleDictionary, dayNumber):
 
-    todaysDayNumber = 3 # For debugging
-    # todaysDayNumber = datetime.today().weekday()
 
-    todaysDayName = numberToDay[todaysDayNumber]
+
+    todaysDayName = numberToDay[dayNumber]
     # Display all classes that have BYDAYs on 'todays_day_number'
 
     i = 0
-    while i < len(scheduleDictionary):
+    while i < len(tempScheduleDictionary):
 
-        eachCourse = scheduleDictionary[i]
+        eachCourse = tempScheduleDictionary[i]
         daysArray = eachCourse['timeInfo']['rRule']['BYDAY']
 
 
@@ -66,13 +76,13 @@ def getCurrentDayClasses(scheduleDictionary):
                 break
         
         if not isToday:
-            scheduleDictionary.pop(i)
+            tempScheduleDictionary.pop(i)
         else:
             i += 1
         
 
     
-    return scheduleDictionary
+    return tempScheduleDictionary
 
 
 def orderByTime(scheduleDictionary):

@@ -41,9 +41,10 @@ def getScheduleInfo():
 
         print("YAY")
         uid = request.args.get('uid')
-        scheduleDictionary = displayScheduleFunctions.getSchedule(uid=uid)
+        scheduleDictionaryArray, currentDay = displayScheduleFunctions.getSchedule(uid=uid)
 
-        return jsonify({'message' : "Schedule successfully recieved" , "scheduleDictionary" : scheduleDictionary}) , 200
+        
+        return jsonify({'message' : "Schedule successfully recieved" , "scheduleDictionaryArray" : scheduleDictionaryArray, 'currentDay' : currentDay}) , 200
 
 @app.route('/')
 def hello_world():

@@ -1,23 +1,48 @@
 from typing import List
+import icalendar
 from ScheduleScreen.Course import Course
 from datetime import datetime
 
 from firebase import db
 
-
-
 # William -- Business Layer (Modifying the input data)
-
+# Takes in the .ics file content as a string.
+# Rreturns a list of Course objects
 def parseICS(fileContent : str) -> List[Course]:
+    courseList = []
+    calendar = icalendar.Calendar.from_ical(fileContent)
+    
+    for event in calendar.walk('VEVENT'):
+        location = event.get("LOCATION")
+        bStart = location.find("Building:") + 10
+        bEnd = location.find("Room:") - 1
+        rStart = bEnd + 1 + 6
+        locationInfo = {
+            "buildingName": location[bStart:bEnd],  # Building Name ex. Winston Chung
+            "roomNumber": location[rStart:],        # Building Number ex. 1000
+            "geoLocation": []
+        }
 
-    # Takes in the .ics file content as a string.
+        summary = event.get('SUMMARY').split()
+        className = ""
+        cEnd = len(summary) - 4
+        for x in range(0, cEnd):
+            className = className + summary[x] + " "
+        className = className + summary[cEnd] # Class Name ex. Introduction to Computer Science
+        courseNum = summary[-3] + " " + summary[-2] + " " + summary[-1] # department, number, section, ex. CS 100 01
+        
+        description = event.get('DESCRIPTION')
+        iStart = description.find("Instructor:") + 11
+        instructor = description[iStart:] # Professor Name ex. William Huang (Primary)
 
-    # Rreturns a list of Course objects
-
-    print()
-
-    return []
-
+        timeInfo = {
+            "startTime": event.get("DTSTART").dt, # Class Time
+            "endTime": event.get("DTEND").dt,     # Class End Time
+            "rRule": event.get("RRULE")           # Recurrence Rule ex. which days, repitition frequency, expiration date
+        }
+        
+        courseList.append(Course(className, courseNum, instructor, locationInfo, timeInfo))
+    return courseList
 
 # Rayyan -- Persistence Layer (Database Access)
 def saveScheduleToFirebase(userID : str , schedule : List[Course]) -> None:
@@ -62,22 +87,22 @@ def inputSchedule(userID : str , file_content : str):
     # DESCRIPTION:CRN: 26876\nCredit Hours: 4.0\nLevel: Undergraduate\nInstructor: Zhao\, Zhijia (Primary) \n
     # END:VEVENT
 
-    locationInfo = {
-        "buildingName" : "Bourns Hall",
-        "roomNumber" : "A125",
-        "geoLocation" : [1,2]
-    }
+    # locationInfo = {
+    #     "buildingName" : "Bourns Hall",
+    #     "roomNumber" : "A125",
+    #     "geoLocation" : [1,2]
+    # }
 
-    timeInfo = {
-        "dateStart" : datetime(2023,9,28),
-        "dateEnd" : datetime(2023,12,8),
-        "daysOfWeek" : ["Tuesday" , "Thursday"],
-        "startTime" : "20:00",
-        "endTime" : "21:20"
-    }
-    course : Course = Course("COMPILER DESIGN", "CS 152", "Zhao, Zhijia", locationInfo, timeInfo)
+    # timeInfo = {
+    #     "dateStart" : datetime(2023,9,28),
+    #     "dateEnd" : datetime(2023,12,8),
+    #     "daysOfWeek" : ["Tuesday" , "Thursday"],
+    #     "startTime" : "20:00",
+    #     "endTime" : "21:20"
+    # }
+    # course : Course = Course("COMPILER DESIGN", "CS 152", "Zhao, Zhijia", locationInfo, timeInfo)
 
-    schedule = [course, course]  
+    # schedule = [course, course]  
     userID = "rayyanzaid0401@gmail.com" 
     saveScheduleToFirebase(userID=userID, schedule=schedule)
 

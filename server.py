@@ -30,6 +30,9 @@ def uploadSchedule():
 
     return jsonify({'message': 'File successfully uploaded'}), 200
 
+
+from ScheduleScreen import displayScheduleFunctions
+
 @app.route('/displaySchedule', methods= ['GET'])
 
 def getScheduleInfo():
@@ -37,6 +40,10 @@ def getScheduleInfo():
     if request.method == "GET":
 
         print("YAY")
+        uid = request.args.get('uid')
+        scheduleDictionary = displayScheduleFunctions.getSchedule(uid=uid)
+
+        return jsonify({'message' : "Schedule successfully recieved" , "scheduleDictionary" : scheduleDictionary}) , 200
 
 @app.route('/')
 def hello_world():

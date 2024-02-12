@@ -2,60 +2,7 @@
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
 <Document id="1au1ru-4H8zhYAXiHxXjPPHgVqjfmn01i">
 	<name>UCR PathFinder Coordinates</name>
-	<gx:CascadingStyle kml:id="__managed_style_22F73664A62EC1F1CAD5">
-		<Style>
-			<IconStyle>
-				<scale>1.2</scale>
-				<Icon>
-					<href>https://earth.google.com/earth/rpc/cc/icon?color=d32f2f&amp;id=2000&amp;scale=4</href>
-				</Icon>
-				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
-			</IconStyle>
-			<LabelStyle>
-			</LabelStyle>
-			<LineStyle>
-				<color>ff2dc0fb</color>
-				<width>6</width>
-			</LineStyle>
-			<PolyStyle>
-				<color>40ffffff</color>
-			</PolyStyle>
-			<BalloonStyle>
-			</BalloonStyle>
-		</Style>
-	</gx:CascadingStyle>
-	<gx:CascadingStyle kml:id="__managed_style_15BEC04E4E2EC1F1CAD5">
-		<Style>
-			<IconStyle>
-				<Icon>
-					<href>https://earth.google.com/earth/rpc/cc/icon?color=d32f2f&amp;id=2000&amp;scale=4</href>
-				</Icon>
-				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
-			</IconStyle>
-			<LabelStyle>
-			</LabelStyle>
-			<LineStyle>
-				<color>ff2dc0fb</color>
-				<width>4</width>
-			</LineStyle>
-			<PolyStyle>
-				<color>40ffffff</color>
-			</PolyStyle>
-			<BalloonStyle>
-			</BalloonStyle>
-		</Style>
-	</gx:CascadingStyle>
-	<StyleMap id="__managed_style_09D39F4F3C2EC1F1CAD5">
-		<Pair>
-			<key>normal</key>
-			<styleUrl>#__managed_style_15BEC04E4E2EC1F1CAD5</styleUrl>
-		</Pair>
-		<Pair>
-			<key>highlight</key>
-			<styleUrl>#__managed_style_22F73664A62EC1F1CAD5</styleUrl>
-		</Pair>
-	</StyleMap>
-	<gx:CascadingStyle kml:id="__managed_style_07059201502EC1F1CAD4">
+	<gx:CascadingStyle kml:id="__managed_style_29FBF428722ED0C1C997">
 		<Style>
 			<IconStyle>
 				<scale>1.2</scale>
@@ -68,7 +15,7 @@
 			</LabelStyle>
 			<LineStyle>
 				<color>ff2dc0fb</color>
-				<width>6</width>
+				<width>3</width>
 			</LineStyle>
 			<PolyStyle>
 				<color>40ffffff</color>
@@ -77,7 +24,7 @@
 			</BalloonStyle>
 		</Style>
 	</gx:CascadingStyle>
-	<gx:CascadingStyle kml:id="__managed_style_1BB3EC46A62EC1F1CAD3">
+	<gx:CascadingStyle kml:id="__managed_style_17BB68A37C2ED0C1C997">
 		<Style>
 			<IconStyle>
 				<Icon>
@@ -89,7 +36,7 @@
 			</LabelStyle>
 			<LineStyle>
 				<color>ff2dc0fb</color>
-				<width>4</width>
+				<width>2</width>
 			</LineStyle>
 			<PolyStyle>
 				<color>40ffffff</color>
@@ -98,133 +45,82 @@
 			</BalloonStyle>
 		</Style>
 	</gx:CascadingStyle>
-	<StyleMap id="__managed_style_0150399CA62EC1F1CAD3">
+	<StyleMap id="__managed_style_05D63A52742ED0C1C997">
 		<Pair>
 			<key>normal</key>
-			<styleUrl>#__managed_style_1BB3EC46A62EC1F1CAD3</styleUrl>
+			<styleUrl>#__managed_style_17BB68A37C2ED0C1C997</styleUrl>
 		</Pair>
 		<Pair>
 			<key>highlight</key>
-			<styleUrl>#__managed_style_07059201502EC1F1CAD4</styleUrl>
+			<styleUrl>#__managed_style_29FBF428722ED0C1C997</styleUrl>
 		</Pair>
 	</StyleMap>
-	<Placemark id="0A8ADDC93F2EB09885B7">
-		<name>WCH Entrance</name>
+	<Placemark id="0DF3D125E32ED0C1C997">
+		<name>SRCTopLeft_INTERSECTION_1</name>
 		<LookAt>
-			<longitude>-117.3263295452099</longitude>
-			<latitude>33.9754867381826</latitude>
-			<altitude>324.2213191739734</altitude>
+			<longitude>-117.3284349179301</longitude>
+			<latitude>33.97880604482755</latitude>
+			<altitude>336.2401958702927</altitude>
 			<heading>0</heading>
 			<tilt>0</tilt>
-			<gx:fovy>35</gx:fovy>
-			<range>48.21448835697993</range>
+			<gx:fovy>30.00000018362979</gx:fovy>
+			<range>282.0143904915677</range>
 			<altitudeMode>absolute</altitudeMode>
 		</LookAt>
-		<styleUrl>#__managed_style_0150399CA62EC1F1CAD3</styleUrl>
+		<styleUrl>#__managed_style_05D63A52742ED0C1C997</styleUrl>
 		<Point>
-			<coordinates>-117.3263134437075,33.97553875117956,320.6091103436892</coordinates>
+			<coordinates>-117.328879841183,33.97926324398185,321.8301386339733</coordinates>
 		</Point>
 	</Placemark>
-	<Placemark id="088EBDB1962EB09946F3">
-		<name>Bourns B118</name>
+	<Placemark id="0E22C1EF9E2ED0FE5D61">
+		<name>SRCEntrance_INTERSECTION_2_1</name>
 		<LookAt>
-			<longitude>-117.3269812198872</longitude>
-			<latitude>33.97539626993761</latitude>
-			<altitude>328.8679093769691</altitude>
+			<longitude>-117.3289234675904</longitude>
+			<latitude>33.97856144119682</latitude>
+			<altitude>319.5798528699162</altitude>
 			<heading>0</heading>
 			<tilt>0</tilt>
-			<gx:fovy>35</gx:fovy>
-			<range>148.7805564630617</range>
+			<gx:fovy>30.00000018362979</gx:fovy>
+			<range>215.3520685601688</range>
 			<altitudeMode>absolute</altitudeMode>
 		</LookAt>
-		<styleUrl>#__managed_style_0150399CA62EC1F1CAD3</styleUrl>
+		<styleUrl>#__managed_style_05D63A52742ED0C1C997</styleUrl>
 		<Point>
-			<coordinates>-117.3272186607141,33.97538543527417,319.677887853075</coordinates>
+			<coordinates>-117.328880456216,33.97848309841572,319.7635720211399</coordinates>
 		</Point>
 	</Placemark>
-	<Placemark id="0124FD01342EB0A761CC">
-		<name>SSC</name>
+	<Placemark id="0B108B211A2ED0FF5F55">
+		<name>SRC_Middle_INTERSECTION_3_1</name>
 		<LookAt>
-			<longitude>-117.3294565045549</longitude>
-			<latitude>33.97401439550627</latitude>
-			<altitude>319.9378447527528</altitude>
+			<longitude>-117.3281625439988</longitude>
+			<latitude>33.97898832695682</latitude>
+			<altitude>336.1064619679466</altitude>
 			<heading>0</heading>
 			<tilt>0</tilt>
-			<gx:fovy>35</gx:fovy>
-			<range>399.2005878081545</range>
+			<gx:fovy>30.00000018362979</gx:fovy>
+			<range>357.9159756781519</range>
 			<altitudeMode>absolute</altitudeMode>
 		</LookAt>
-		<styleUrl>#__managed_style_0150399CA62EC1F1CAD3</styleUrl>
+		<styleUrl>#__managed_style_05D63A52742ED0C1C997</styleUrl>
 		<Point>
-			<coordinates>-117.330329233349,33.97402514116751,318.0812791007335</coordinates>
+			<coordinates>-117.328063510563,33.979264338566,323.6207176135451</coordinates>
 		</Point>
 	</Placemark>
-	<Placemark id="0E66F7D89F2EB0AD050D">
-		<name>Bourns A115</name>
+	<Placemark id="09EA20BDE32ED0FFEDC7">
+		<name>SRC_TopRight_INTERSECTION_4_3</name>
 		<LookAt>
-			<longitude>-117.327045345951</longitude>
-			<latitude>33.97550109550978</latitude>
-			<altitude>329.0327289754194</altitude>
+			<longitude>-117.3274747670374</longitude>
+			<latitude>33.97933637566715</latitude>
+			<altitude>324.056714825594</altitude>
 			<heading>0</heading>
 			<tilt>0</tilt>
-			<gx:fovy>35</gx:fovy>
-			<range>132.4075410225305</range>
+			<gx:fovy>30.00000018362979</gx:fovy>
+			<range>341.9070223795643</range>
 			<altitudeMode>absolute</altitudeMode>
 		</LookAt>
-		<styleUrl>#__managed_style_0150399CA62EC1F1CAD3</styleUrl>
+		<styleUrl>#__managed_style_05D63A52742ED0C1C997</styleUrl>
 		<Point>
-			<coordinates>-117.3273402268656,33.97553344807476,320.5769829203078</coordinates>
-		</Point>
-	</Placemark>
-	<Placemark id="0FD4BA56002EB0B1F7BD">
-		<name>WCH_and_NCampusDrive</name>
-		<LookAt>
-			<longitude>-117.3256548510755</longitude>
-			<latitude>33.97544930281016</latitude>
-			<altitude>321.2267439502</altitude>
-			<heading>-64.91065267485729</heading>
-			<tilt>57.18425517765535</tilt>
-			<gx:fovy>35</gx:fovy>
-			<range>263.5386452931198</range>
-			<altitudeMode>absolute</altitudeMode>
-		</LookAt>
-		<styleUrl>#__managed_style_09D39F4F3C2EC1F1CAD5</styleUrl>
-		<Point>
-			<coordinates>-117.3252039431674,33.97540825428843,320.6670600313031</coordinates>
-		</Point>
-	</Placemark>
-	<Placemark id="0B9D6E86B32EB0B32DE9">
-		<name>WCH_and_Physics</name>
-		<LookAt>
-			<longitude>-117.3258452517788</longitude>
-			<latitude>33.97497734190885</latitude>
-			<altitude>326.0962553687554</altitude>
-			<heading>-64.91015712185373</heading>
-			<tilt>57.18328427616591</tilt>
-			<gx:fovy>35</gx:fovy>
-			<range>135.070067748984</range>
-			<altitudeMode>absolute</altitudeMode>
-		</LookAt>
-		<styleUrl>#__managed_style_09D39F4F3C2EC1F1CAD5</styleUrl>
-		<Point>
-			<coordinates>-117.3256941942667,33.97496974116942,320.529500796457</coordinates>
-		</Point>
-	</Placemark>
-	<Placemark id="0821BE89CD2EB0B3DDF4">
-		<name>Physics 2000</name>
-		<LookAt>
-			<longitude>-117.3251200338785</longitude>
-			<latitude>33.97415481526664</latitude>
-			<altitude>331.0931593626971</altitude>
-			<heading>-114.2286052633775</heading>
-			<tilt>40.71411375979457</tilt>
-			<gx:fovy>35</gx:fovy>
-			<range>135.9937646162689</range>
-			<altitudeMode>absolute</altitudeMode>
-		</LookAt>
-		<styleUrl>#__managed_style_0150399CA62EC1F1CAD3</styleUrl>
-		<Point>
-			<coordinates>-117.3250226367477,33.97410144756367,331.5128579572515</coordinates>
+			<coordinates>-117.3270668864107,33.97925958738859,325.4870547669514</coordinates>
 		</Point>
 	</Placemark>
 </Document>

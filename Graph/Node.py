@@ -137,7 +137,7 @@ class AutomateNodeCreation:
     
 
 if __name__ == '__main__':
-    nodeCreator = AutomateNodeCreation("/Users/rayyanzaid/Desktop/ucr-pathfinder-backend/Experimenting/GoogleEarth/test.kml")
+    nodeCreator = AutomateNodeCreation("Experimenting\\GoogleEarth\\test.kml")
 
     nodes : list[Node] = nodeCreator.createNodesFromKml()
 

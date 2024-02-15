@@ -114,7 +114,7 @@ class AutomateEdgeCreation:
                 coordinates = placemark.find('.//kml:coordinates', ns)
                 if coordinates is not None:
             
-                    print(coordinates)
+                    # print(coordinates)
 
 
                     coord_text = coordinates.text.strip()

@@ -1,5 +1,5 @@
 from Node import Node, AutomateNodeCreation
-from Edge import Edge
+from Edge import Edge, AutomateEdgeCreation
 
 
 class Graph:
@@ -8,15 +8,11 @@ class Graph:
         
         self.googleEarthFile : str = googleEarthFile
 
-
-
         # Dictionary of Node IDs to Node Object (allows us to access a Node with it's ID)
         self.nodeIdToObject : dict[str, Node] = dict()
 
+        # Each node has a property called "edges" which is an array of its Edges. That's why there's no Edge variable in this class
 
-        # Node to Edge Mapping. Ex. (2,1) : Edge() -- The edge that connects nodes 2 and 1
-        self.nodesToEdge : dict[tuple , Edge] = dict()
-    
 
     # Purpose : Create nodes and add them to the nodeIdToObject dictionary
         
@@ -26,54 +22,46 @@ class Graph:
 
         nodes : list[Node] = autoNodeCreation.createNodesFromKml()
 
+
+        # Adding Nodes to the graph: 
+        # Save each node to the dictionary for quick access
+
         for eachNode in nodes:
 
-            nodeID : str = eachNode.number
+            nodeID : str = eachNode.nodeID
 
             self.nodeIdToObject[nodeID] = eachNode
         
     def createEdges(self):
 
-        # Go through each node and get each neighbor's number and Node object
-        # For each (nodeNumber, neighborNodeNumber) create an Edge using the Node objects
+        automateEdgeCreation : AutomateEdgeCreation = AutomateEdgeCreation(self.googleEarthFile, self.nodeIdToObject)
 
-        for nodeNumber , nodeObject in self.nodeIdToObject.items():
-
-            neighborNumberList = nodeObject.neighbors
-
-            for neighborNumber in neighborNumberList:
-                
-                nodeKey = self.getEdgeFromNodeNumbers(nodeNumber, neighborNumber)
-                
-                nodeObject = self.nodeIdToObject[nodeNumber]
-                neighborNodeObject = self.nodeIdToObject[neighborNumber]
-
-                self.nodesToEdge[nodeKey] = Edge(nodeObject,neighborNodeObject)
+        edges : list[Edge] = automateEdgeCreation.createEdgesFromKml()
 
 
-    # This function takes in 2 node numbers (strings), turns them into integers, sorts them, turns back to string
-    def getEdgeFromNodeNumbers(self, node1Number : str, node2Number : str) -> tuple:
 
-        node1NumberInt = int(node1Number)
-        node2NumberInt = int(node2Number)
+        # Adding Edges to the graph: 
 
-        nodeKey = ()
+        # For each edge, we want to populate the Node's "edges" property
 
-        if node1NumberInt < node2NumberInt:
+        # Ex. If an edge is connecting 2 and 3, we want to add the edge to Nodes 2 and 3.
 
-            nodeKey = (node1Number, node2Number)
+        for eachEdge in edges:
 
-        else:
-            nodeKey = (node2Number, node1Number)
+            nodeId1 = eachEdge.n1NodeID
+            nodeId2 = eachEdge.n2NodeID
 
-        return nodeKey
+            self.nodeIdToObject[nodeId1].addEdge(eachEdge)
+            self.nodeIdToObject[nodeId2].addEdge(eachEdge)
+
+    
 
 # Testing
             
 
 if __name__ == '__main__':
 
-    ucr_graph : Graph = Graph("./Experimenting/GoogleEarth/test.kml")
+    ucr_graph : Graph = Graph("./Experimenting/GoogleEarth/finishedSRC.kml")
 
     ucr_graph.createNodes()
 

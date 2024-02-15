@@ -2,7 +2,60 @@
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
 <Document id="1au1ru-4H8zhYAXiHxXjPPHgVqjfmn01i">
 	<name>UCR PathFinder Coordinates</name>
-	<gx:CascadingStyle kml:id="__managed_style_29FBF428722ED0C1C997">
+	<gx:CascadingStyle kml:id="__managed_style_58ED39393D2EE02443A4">
+		<Style>
+			<IconStyle>
+				<scale>1.2</scale>
+				<Icon>
+					<href>https://earth.google.com/earth/rpc/cc/icon?color=1976d2&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff2dc0fb</color>
+				<width>0.75</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<gx:CascadingStyle kml:id="__managed_style_4EBE4B122B2EE02443A4">
+		<Style>
+			<IconStyle>
+				<Icon>
+					<href>https://earth.google.com/earth/rpc/cc/icon?color=1976d2&amp;id=2000&amp;scale=4</href>
+				</Icon>
+				<hotSpot x="64" y="128" xunits="pixels" yunits="insetPixels"/>
+			</IconStyle>
+			<LabelStyle>
+			</LabelStyle>
+			<LineStyle>
+				<color>ff2dc0fb</color>
+				<width>0.5</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>40ffffff</color>
+			</PolyStyle>
+			<BalloonStyle>
+			</BalloonStyle>
+		</Style>
+	</gx:CascadingStyle>
+	<StyleMap id="__managed_style_3F6C2FD9562EE02443A4">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#__managed_style_4EBE4B122B2EE02443A4</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#__managed_style_58ED39393D2EE02443A4</styleUrl>
+		</Pair>
+	</StyleMap>
+	<gx:CascadingStyle kml:id="__managed_style_2F33C7C2D02EE02443A2">
 		<Style>
 			<IconStyle>
 				<scale>1.2</scale>
@@ -24,7 +77,7 @@
 			</BalloonStyle>
 		</Style>
 	</gx:CascadingStyle>
-	<gx:CascadingStyle kml:id="__managed_style_17BB68A37C2ED0C1C997">
+	<gx:CascadingStyle kml:id="__managed_style_1404CBC0742EE02443A2">
 		<Style>
 			<IconStyle>
 				<Icon>
@@ -45,14 +98,14 @@
 			</BalloonStyle>
 		</Style>
 	</gx:CascadingStyle>
-	<StyleMap id="__managed_style_05D63A52742ED0C1C997">
+	<StyleMap id="__managed_style_0AFE35D80A2EE02443A2">
 		<Pair>
 			<key>normal</key>
-			<styleUrl>#__managed_style_17BB68A37C2ED0C1C997</styleUrl>
+			<styleUrl>#__managed_style_1404CBC0742EE02443A2</styleUrl>
 		</Pair>
 		<Pair>
 			<key>highlight</key>
-			<styleUrl>#__managed_style_29FBF428722ED0C1C997</styleUrl>
+			<styleUrl>#__managed_style_2F33C7C2D02EE02443A2</styleUrl>
 		</Pair>
 	</StyleMap>
 	<Placemark id="0DF3D125E32ED0C1C997">
@@ -67,7 +120,7 @@
 			<range>282.0143904915677</range>
 			<altitudeMode>absolute</altitudeMode>
 		</LookAt>
-		<styleUrl>#__managed_style_05D63A52742ED0C1C997</styleUrl>
+		<styleUrl>#__managed_style_0AFE35D80A2EE02443A2</styleUrl>
 		<Point>
 			<coordinates>-117.328879841183,33.97926324398185,321.8301386339733</coordinates>
 		</Point>
@@ -84,13 +137,13 @@
 			<range>215.3520685601688</range>
 			<altitudeMode>absolute</altitudeMode>
 		</LookAt>
-		<styleUrl>#__managed_style_05D63A52742ED0C1C997</styleUrl>
+		<styleUrl>#__managed_style_0AFE35D80A2EE02443A2</styleUrl>
 		<Point>
 			<coordinates>-117.328880456216,33.97848309841572,319.7635720211399</coordinates>
 		</Point>
 	</Placemark>
 	<Placemark id="0B108B211A2ED0FF5F55">
-		<name>SRC_Middle_INTERSECTION_3_1</name>
+		<name>SRCMiddle_INTERSECTION_3_1</name>
 		<LookAt>
 			<longitude>-117.3281625439988</longitude>
 			<latitude>33.97898832695682</latitude>
@@ -101,13 +154,13 @@
 			<range>357.9159756781519</range>
 			<altitudeMode>absolute</altitudeMode>
 		</LookAt>
-		<styleUrl>#__managed_style_05D63A52742ED0C1C997</styleUrl>
+		<styleUrl>#__managed_style_0AFE35D80A2EE02443A2</styleUrl>
 		<Point>
 			<coordinates>-117.328063510563,33.979264338566,323.6207176135451</coordinates>
 		</Point>
 	</Placemark>
 	<Placemark id="09EA20BDE32ED0FFEDC7">
-		<name>SRC_TopRight_INTERSECTION_4_3</name>
+		<name>SRCTopRight_INTERSECTION_4_3</name>
 		<LookAt>
 			<longitude>-117.3274747670374</longitude>
 			<latitude>33.97933637566715</latitude>
@@ -118,10 +171,63 @@
 			<range>341.9070223795643</range>
 			<altitudeMode>absolute</altitudeMode>
 		</LookAt>
-		<styleUrl>#__managed_style_05D63A52742ED0C1C997</styleUrl>
+		<styleUrl>#__managed_style_0AFE35D80A2EE02443A2</styleUrl>
 		<Point>
 			<coordinates>-117.3270668864107,33.97925958738859,325.4870547669514</coordinates>
 		</Point>
+	</Placemark>
+	<Placemark id="07E208C1422EDAC50DA8">
+		<name>curve test 1</name>
+		<LookAt>
+			<longitude>-117.3257748779117</longitude>
+			<latitude>33.97520920282823</latitude>
+			<altitude>337.905341065651</altitude>
+			<heading>0</heading>
+			<tilt>0</tilt>
+			<gx:fovy>35</gx:fovy>
+			<range>225.5033471725619</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_0AFE35D80A2EE02443A2</styleUrl>
+		<Point>
+			<coordinates>-117.3252139133802,33.97540031455344,320.6683991569377</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark id="0A3D1A473A2EDAC5AABB">
+		<name>curve test 2</name>
+		<LookAt>
+			<longitude>-117.3257748779117</longitude>
+			<latitude>33.97520920282823</latitude>
+			<altitude>337.905341065651</altitude>
+			<heading>0</heading>
+			<tilt>0</tilt>
+			<gx:fovy>35</gx:fovy>
+			<range>225.5033471725619</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_0AFE35D80A2EE02443A2</styleUrl>
+		<Point>
+			<coordinates>-117.3257218462633,33.97495065367539,320.6043641219583</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark id="04EF1C67B72EDAC9226F">
+		<name>ct1 and ct2</name>
+		<LookAt>
+			<longitude>-117.3257748779117</longitude>
+			<latitude>33.97520920282823</latitude>
+			<altitude>337.905341065651</altitude>
+			<heading>0</heading>
+			<tilt>0</tilt>
+			<gx:fovy>35</gx:fovy>
+			<range>225.5033472</range>
+			<altitudeMode>absolute</altitudeMode>
+		</LookAt>
+		<styleUrl>#__managed_style_3F6C2FD9562EE02443A4</styleUrl>
+		<LineString>
+			<coordinates>
+				-117.325214769792,33.97540344729598,0 -117.3252843491075,33.97524933272393,0 -117.3254214603252,33.97516411703097,0 -117.3255994950394,33.9750718502636,0 -117.3256490719773,33.97500079456974,0 -117.3257217673792,33.97495169028009,0 
+			</coordinates>
+		</LineString>
 	</Placemark>
 </Document>
 </kml>

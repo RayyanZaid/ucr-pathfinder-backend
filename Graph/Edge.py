@@ -6,8 +6,8 @@ from Node import AutomateNodeCreation
 
 MPH_WALKING_SPEED = 2.5
 MILE_TO_FEET = 5280
-
-FEET_PER_MINUTE = (MPH_WALKING_SPEED * MILE_TO_FEET) / 60
+MINUTES_IN_HOUR = 60
+FEET_PER_MINUTE = (MPH_WALKING_SPEED * MILE_TO_FEET) / MINUTES_IN_HOUR
 
 class Edge:
     def __init__(self, n1 : Node, n2 : Node):
@@ -26,8 +26,10 @@ class Edge:
         self.time = self.length / FEET_PER_MINUTE
 
     def printValues(self):
+        print(f"Between {self.n1.name} and {self.n2.name}")
         print(f"Distance: {self.length} feet")
         print(f"Time: {self.time} minutes")
+        print()
 
 
 if __name__ == "__main__":
@@ -37,10 +39,13 @@ if __name__ == "__main__":
     nodes : list[Node] = nodeCreator.createNodesFromKml()
 
 
-    testEdge : Edge = Edge(nodes[0] , nodes[1])
-    testEdge.setDistance()
-    testEdge.setTime()
-    testEdge.printValues()
+    for i in range(len(nodes)):
+
+        for j in range(i+1,len(nodes)):
+            testEdge : Edge = Edge(nodes[i] , nodes[j])
+            testEdge.setDistance()
+            testEdge.setTime()
+            testEdge.printValues()
     # for eachNode in nodes:
 
     #     print(f"Name: {eachNode.name}")

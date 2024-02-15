@@ -13,7 +13,7 @@ MINUTES_IN_HOUR = 60
 FEET_PER_MINUTE = (MPH_WALKING_SPEED * MILE_TO_FEET) / MINUTES_IN_HOUR
 
 class Edge:
-    def __init__(self, n1 : Node, n2 : Node):
+    def __init__(self, n1 : Node, n2 : Node, arrayOfCoordinates = []):
         self.n1 = n1
         self.n2 = n2
 
@@ -22,6 +22,8 @@ class Edge:
 
         self.length : int
         self.time : float
+        
+        self.arrayOfCoordinates = arrayOfCoordinates
 
     def setDistance(self):
         coord1 = (self.n1.location[0], self.n1.location[1]) #needs to be in the format (lat,long)
@@ -115,15 +117,36 @@ class AutomateEdgeCreation:
                     print(coordinates)
 
 
+                    coord_text = coordinates.text.strip()
+
+                    arrayOfCoordinateStrings = coord_text.split(' ')
+
+
+                    
+
+                    arrayOfCoordinates : list[list[float]] = []
+
+
+                    for eachString in arrayOfCoordinateStrings:
+
+                        longitude, latitude, _ = eachString.split(',')
+
+                        latitude = float(latitude)
+                        longitude = float(longitude)
+
+                        arrayOfCoordinates.append([latitude,longitude])
 
 
 
-                n1 : Node = self.nodeIDToNodeObject[firstNumber]
-                n2 : Node = self.nodeIDToNodeObject[secondNumber]
 
-                edge = Edge(n1,n2)
 
-                edges.append(edge)
+
+                    n1 : Node = self.nodeIDToNodeObject[firstNumber]
+                    n2 : Node = self.nodeIDToNodeObject[secondNumber]
+
+                    edge = Edge(n1,n2, arrayOfCoordinates)
+
+                    edges.append(edge)
 
 
         return edges

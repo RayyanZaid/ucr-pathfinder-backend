@@ -7,7 +7,7 @@ from geopy import distance
 from Node import AutomateNodeCreation
 
 
-MPH_WALKING_SPEED = 2.5
+MPH_WALKING_SPEED = 3
 MILE_TO_FEET = 5280
 MINUTES_IN_HOUR = 60
 FEET_PER_MINUTE = (MPH_WALKING_SPEED * MILE_TO_FEET) / MINUTES_IN_HOUR

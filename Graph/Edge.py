@@ -1,4 +1,3 @@
-import geopy
 from Node import Node
 from geopy import distance
 from Node import AutomateNodeCreation

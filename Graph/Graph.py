@@ -15,7 +15,7 @@ class Graph:
 
 
         # Node to Edge Mapping. Ex. (2,1) : Edge() -- The edge that connects nodes 2 and 1
-        self.nodesToEdge : dict[list , Edge] = dict()
+        self.nodesToEdge : dict[tuple , Edge] = dict()
     
 
     # Purpose : Create nodes and add them to the nodeIdToObject dictionary
@@ -52,19 +52,19 @@ class Graph:
 
 
     # This function takes in 2 node numbers (strings), turns them into integers, sorts them, turns back to string
-    def getEdgeFromNodeNumbers(node1Number : str, node2Number : str):
+    def getEdgeFromNodeNumbers(self, node1Number : str, node2Number : str) -> tuple:
 
         node1NumberInt = int(node1Number)
         node2NumberInt = int(node2Number)
 
-        nodeKey = []
+        nodeKey = ()
 
         if node1NumberInt < node2NumberInt:
 
-            nodeKey = [node1Number, node2Number]
+            nodeKey = (node1Number, node2Number)
 
         else:
-            nodeKey = [node2Number, node1Number]
+            nodeKey = (node2Number, node1Number)
 
         return nodeKey
 

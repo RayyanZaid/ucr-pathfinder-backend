@@ -57,6 +57,8 @@ class AutomateNodeCreation:
                 name = "No Name"
 
 
+            if name[0:4] == "EDGE":
+                continue
 
 
             nodeInformation = self.parseInfoFromName(name)
@@ -76,38 +78,45 @@ class AutomateNodeCreation:
 
 
 
-            # Extracting the coordinates
-            coordinates = placemark.find('.//kml:coordinates', ns)
-            if coordinates is not None:
+            
         
-                coord_text = coordinates.text.strip()
-
-                # Coordinates are provided as longitude,latitude,altitude
-                longitude, latitude, altitude = coord_text.split(',')
-
-                # print(f"Name: {name}, Coordinates: Latitude {latitude}, Longitude {longitude}")
-            else:
-                print(f"Name: {name} has no coordinates.")
 
 
             # Create Node object
 
-            nodeName = nodeInformation["nodeName"]
+            if nodeInformation != 'No match found.':
+                
+                nodeName = nodeInformation["nodeName"]
 
-            nodeNumber = nodeInformation["nodeNumber"]
-            nodeLocation : list = [latitude,longitude, altitude]
-            nodeType : NodeType
+                nodeNumber = nodeInformation["nodeNumber"]
 
-            if nodeInformation["nodeType"] in stringToEnum:
+                # Extracting the coordinates
+                
+                coordinates = placemark.find('.//kml:coordinates', ns)
+                if coordinates is not None:
+            
+                    coord_text = coordinates.text.strip()
 
-                nodeType = stringToEnum[nodeInformation["nodeType"]]
+                    # Coordinates are provided as longitude,latitude,altitude
+                    longitude, latitude, altitude = coord_text.split(',')
 
-            nodeNeighbors = nodeInformation["neighborNumbers"]
+                    # print(f"Name: {name}, Coordinates: Latitude {latitude}, Longitude {longitude}")
+                else:
+                    print(f"Name: {name} has no coordinates.")
+
+                nodeLocation : list = [latitude,longitude, altitude]
+                nodeType : NodeType
+
+                if nodeInformation["nodeType"] in stringToEnum:
+
+                    nodeType = stringToEnum[nodeInformation["nodeType"]]
+
+                nodeNeighbors = nodeInformation["neighborNumbers"]
 
 
-            node = Node(name=nodeName, number=nodeNumber, location=nodeLocation, type=nodeType, neighbors=nodeNeighbors)
+                node = Node(name=nodeName, number=nodeNumber, location=nodeLocation, type=nodeType, neighbors=nodeNeighbors)
 
-            nodes.append(node)
+                nodes.append(node)
 
 
         return nodes

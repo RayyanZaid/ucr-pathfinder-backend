@@ -81,7 +81,52 @@ class Navigation:
         # might implement later
 
         return self.destinationBuildingName
+    
+    """
+        Returns a dictionary that looks like this:
 
+        {
+            'nodes' : Node [ ] 
+            'edges' : Edge [ ]
+            
+        }
+
+        List of nodes and edges of the path to get from the source node to the destination node. If there are multiple
+        destinations, figure out which one is the fastest
+
+    """
+
+    def shortestPathAlgorithm(self, sourceNodeID : str, destinationNodeID : str):
+        
+        return int(sourceNodeID) - int(destinationNodeID)
+    
+
+
+
+    def getShortestPathNodesAndEdges(self) -> dict[str , list]:
+
+        pathDictionary = {
+
+            "node" : [],
+            "edge" : [],
+
+        }
+
+        sourceNodeID = self.sourceNodeID
+
+        destinationNodeIDs = self.destinationNodeIDs
+
+
+        minLength = float('inf')
+        for eachDestinationNodeID in destinationNodeIDs:
+
+            length = self.shortestPathAlgorithm(sourceNodeID, eachDestinationNodeID)
+
+            if length < minLength:
+                minLength = length
+
+
+        return pathDictionary
 
 
 if __name__ == "__main__":

@@ -145,7 +145,8 @@ class AutomateEdgeCreation:
                     n2 : Node = self.nodeIDToNodeObject[secondNumber]
 
                     edge = Edge(n1,n2, arrayOfCoordinates)
-
+                    edge.setDistance()
+                    edge.setTime()
                     edges.append(edge)
 
 

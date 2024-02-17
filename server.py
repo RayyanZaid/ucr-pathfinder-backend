@@ -78,7 +78,7 @@ def getShortestPath():
             },
             
             {
-                 "name" : 'INTERSECTION',
+                 "name" : 'Materials Sci and Engineering',
                  "location": ['33.97622378123113', '-117.3273110476977', '333.6064893163547']
             }
         ]

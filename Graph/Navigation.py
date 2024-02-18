@@ -95,7 +95,7 @@ class Navigation:
 
         return adjacents
     
-    def getEdgeDistance(self, cur : str, adj : str):
+    def getDistance(self, cur : str, adj : str):
         for edge in ucr_graph.nodeIdToObject(cur).edges:
             if adj == edge.n1.nodeID or adj == edge.n2.nodeID:
                 return edge.length
@@ -103,25 +103,34 @@ class Navigation:
         return 1
 
     def findMinID(self):
-        min = self.vertexCost[self.current[0]]               #initialize min as cost of first node in current[]
+        min = self.totalCost[self.current[0]]               #initialize min as cost of first node in current[]
         id = self.current[0]
         for eachVertexID in self.current:                    #loop through all id's in cureent to find the one with min distance
-            if self.vertexCost[eachVertexID] < min:
-                min = self.vertexCost[eachVertexID]
+            if self.totalCost[eachVertexID] < min:
+                min = self.totalCost[eachVertexID]
                 id = eachVertexID
         return id
     
-    # def calculateDistance(self, id : str):
-    #     adjacents = self.getAdjacent(id)
-    #     for each in adjacents:
-    #         if each in self.finished:
-    #             continue
-    #         elif each in self.current:
-    #             #recalculate
-    #             print()
-    #         else:
-    #             #add to current
-    #             print()
+    def recalculate(self, id : str):
+        adjacents = self.getAdjacent(id)
+        for each in adjacents:
+            if each in self.finished:
+                continue
+            elif each in self.current:
+                newDist = self.getDistance(id, each) + self.totalCost[id]
+                if newDist < self.totalCost[each]: # if current node total cost plus edge to neighbor node is less than that neighbor nodes total cost
+                    self.totalCost[each] = newDist # update distance of neighbor
+                    self.completePath[each] = self.completePath[id]
+                    self.completePath[each].append(id) # update path of neighbor
+            else:
+                cost = self.totalCost[id] + self.getDistance(id, each)
+                path = self.completePath[id]
+                path.append(each)
+
+                self.current.append(each)
+                self.totalCost[each] = cost
+                self.completePath[each] = path
+                print()
 
     """
         Returns a dictionary that looks like this:
@@ -135,15 +144,15 @@ class Navigation:
     
     # def shortestPathAlgorithm(self, sourceNodeID : str, destinationNodeID : str):
     #     found = 0 #false
-    #     self.vertexCost = {sourceNodeID : 0} # distance or time to reach a vertex, starting vertex is sourceNodeID
-    #     self.vertexPath = {sourceNodeID : [sourceNodeID]} #arrays that contain path of nodeID strings
+    #     self.totalCost = {sourceNodeID : 0} # distance to reach a vertex, starting vertex is sourceNodeID
+    #     self.completePath = {sourceNodeID : [sourceNodeID]} #arrays that contain path of nodeID strings
     #     self.finished = [] # array of nodeID strings represented by vertices that are completed
     #     self.current = [sourceNodeID] # array of nodeID strings represented by vertices that are being processed
         
     #     #what happens if node is not found?
     #     while found == 0:                                   #loop till destination node is completed
     #         selected = self.findMinID()                     #find unfinished node with shortest distance
-    #         self.calculateDistance(selected)
+    #         self.recalculate(selected)
 
 
     #     return int(sourceNodeID) - int(destinationNodeID)

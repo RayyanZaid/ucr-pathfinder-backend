@@ -95,6 +95,13 @@ class Navigation:
 
         return adjacents
     
+    def getEdgeDistance(self, cur : str, adj : str):
+        for edge in ucr_graph.nodeIdToObject(cur).edges:
+            if adj == edge.n1.nodeID or adj == edge.n2.nodeID:
+                return edge.length
+        print("getEdgeDistance could not find the edge")
+        return 1
+
     def findMinID(self):
         min = self.vertexCost[self.current[0]]               #initialize min as cost of first node in current[]
         id = self.current[0]
@@ -104,6 +111,18 @@ class Navigation:
                 id = eachVertexID
         return id
     
+    # def calculateDistance(self, id : str):
+    #     adjacents = self.getAdjacent(id)
+    #     for each in adjacents:
+    #         if each in self.finished:
+    #             continue
+    #         elif each in self.current:
+    #             #recalculate
+    #             print()
+    #         else:
+    #             #add to current
+    #             print()
+
     """
         Returns a dictionary that looks like this:
         {
@@ -113,6 +132,7 @@ class Navigation:
         List of nodes and edges of the path to get from the source node to the destination node. If there are multiple
         destinations, figure out which one is the fastest
     """
+    
     # def shortestPathAlgorithm(self, sourceNodeID : str, destinationNodeID : str):
     #     found = 0 #false
     #     self.vertexCost = {sourceNodeID : 0} # distance or time to reach a vertex, starting vertex is sourceNodeID
@@ -123,6 +143,7 @@ class Navigation:
     #     #what happens if node is not found?
     #     while found == 0:                                   #loop till destination node is completed
     #         selected = self.findMinID()                     #find unfinished node with shortest distance
+    #         self.calculateDistance(selected)
 
 
     #     return int(sourceNodeID) - int(destinationNodeID)

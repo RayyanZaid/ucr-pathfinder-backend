@@ -111,7 +111,7 @@ class Navigation:
                 id = eachVertexID
         return id
     
-    def recalculate(self, id : str):
+    def calculate(self, id : str): # dijkstra visit
         adjacents = self.getAdjacent(id)
         for each in adjacents:
             if each in self.finished:
@@ -126,11 +126,14 @@ class Navigation:
                 cost = self.totalCost[id] + self.getDistance(id, each)
                 path = self.completePath[id]
                 path.append(each)
-
+                
                 self.current.append(each)
                 self.totalCost[each] = cost
                 self.completePath[each] = path
                 print()
+
+        self.finished.append(id)
+        self.current.remove(id)
 
     """
         Returns a dictionary that looks like this:
@@ -142,20 +145,24 @@ class Navigation:
         destinations, figure out which one is the fastest
     """
     
-    # def shortestPathAlgorithm(self, sourceNodeID : str, destinationNodeID : str):
-    #     found = 0 #false
-    #     self.totalCost = {sourceNodeID : 0} # distance to reach a vertex, starting vertex is sourceNodeID
-    #     self.completePath = {sourceNodeID : [sourceNodeID]} #arrays that contain path of nodeID strings
-    #     self.finished = [] # array of nodeID strings represented by vertices that are completed
-    #     self.current = [sourceNodeID] # array of nodeID strings represented by vertices that are being processed
+    def shortestPathAlgorithm(self, sourceNodeID : str, destinationNodeID : str):
+        found = 0 #false
+        self.totalCost = {sourceNodeID : 0} # distance to reach a vertex, starting vertex is sourceNodeID
+        self.completePath = {sourceNodeID : [sourceNodeID]} #arrays that contain path of nodeID strings
+        self.finished = [] # array of nodeID strings represented by vertices that are completed
+        self.current = [sourceNodeID] # array of nodeID strings represented by vertices that are being processed
         
-    #     #what happens if node is not found?
-    #     while found == 0:                                   #loop till destination node is completed
-    #         selected = self.findMinID()                     #find unfinished node with shortest distance
-    #         self.recalculate(selected)
+        #what happens if node is not found?
+        while found == 0:                                   #loop till destination node is completed
+            selected = self.findMinID()                     #find unfinished node with shortest distance
+            if selected == destinationNodeID:
+                found = 1
+            self.calculate(selected)
+            if not self.current:
+                found = 1
+                print("could not find path")
 
-
-    #     return int(sourceNodeID) - int(destinationNodeID)
+        return self.totalCost[destinationNodeID]
     
 
 

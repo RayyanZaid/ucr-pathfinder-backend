@@ -120,16 +120,16 @@ class Navigation:
                 newDist = self.getDistance(id, each) + self.totalCost[id]
                 if newDist < self.totalCost[each]: # if current node total cost plus edge to neighbor node is less than that neighbor nodes total cost
                     self.totalCost[each] = newDist # update distance of neighbor
-                    self.completePath[each] = self.completePath[id]
-                    self.completePath[each].append(id) # update path of neighbor
+                    self.vertexPaths[each] = self.vertexPaths[id]
+                    self.vertexPaths[each].append(id) # update path of neighbor
             else:
                 cost = self.totalCost[id] + self.getDistance(id, each)
-                path = self.completePath[id]
+                path = self.vertexPaths[id]
                 path.append(each)
                 
                 self.current.append(each)
                 self.totalCost[each] = cost
-                self.completePath[each] = path
+                self.vertexPaths[each] = path
                 print()
 
         self.finished.append(id)
@@ -145,10 +145,10 @@ class Navigation:
         destinations, figure out which one is the fastest
     """
     
-    def shortestPathAlgorithm(self, sourceNodeID : str, destinationNodeID : str):
+    def shortestPathAlgorithm(self, sourceNodeID : str, destinationNodeID : str): # path to destination is at the bottom of the function 
         found = 0 #false
         self.totalCost = {sourceNodeID : 0} # distance to reach a vertex, starting vertex is sourceNodeID
-        self.completePath = {sourceNodeID : [sourceNodeID]} #arrays that contain path of nodeID strings
+        self.vertexPaths = {sourceNodeID : [sourceNodeID]} #arrays that contain path of nodeID strings
         self.finished = [] # array of nodeID strings represented by vertices that are completed
         self.current = [sourceNodeID] # array of nodeID strings represented by vertices that are being processed
         
@@ -161,7 +161,9 @@ class Navigation:
             if not self.current:
                 found = 1
                 print("could not find path")
+                return
 
+        self.pathToDestination = self.vertexPaths[destinationNodeID] # destination path
         return self.totalCost[destinationNodeID]
     
 

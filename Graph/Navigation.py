@@ -95,6 +95,15 @@ class Navigation:
 
         return adjacents
     
+    def findMinID(self):
+        min = self.vertexCost[self.current[0]]               #initialize min as cost of first node in current[]
+        id = self.current[0]
+        for eachVertexID in self.current:                    #loop through all id's in cureent to find the one with min distance
+            if self.vertexCost[eachVertexID] < min:
+                min = self.vertexCost[eachVertexID]
+                id = eachVertexID
+        return id
+    
     """
         Returns a dictionary that looks like this:
         {
@@ -104,20 +113,19 @@ class Navigation:
         List of nodes and edges of the path to get from the source node to the destination node. If there are multiple
         destinations, figure out which one is the fastest
     """
-    def shortestPathAlgorithm(self, sourceNodeID : str, destinationNodeID : str):
-        # found = 0 #false
-        # self.vertexCost = {sourceNodeID : 0} # distance or time to reach a vertex, starting vertex is sourceNodeID
-        # self.vertexPath = {sourceNodeID : [sourceNodeID]} #arrays that contain path mappped to each vertex
-        # finished = [] # array of vertices that are completed
-        # current = [sourceNodeID] # array of vertices that are being processed
+    # def shortestPathAlgorithm(self, sourceNodeID : str, destinationNodeID : str):
+    #     found = 0 #false
+    #     self.vertexCost = {sourceNodeID : 0} # distance or time to reach a vertex, starting vertex is sourceNodeID
+    #     self.vertexPath = {sourceNodeID : [sourceNodeID]} #arrays that contain path of nodeID strings
+    #     self.finished = [] # array of nodeID strings represented by vertices that are completed
+    #     self.current = [sourceNodeID] # array of nodeID strings represented by vertices that are being processed
         
-        # while found == 0:                                   #loop till destination node is completed
-        #     min = self.vertexCost[current[0]]               #initialize min as cost of first node in current[]
-        #     for eachVertexID in current:                    #loop through all id's in cureent to find the one with min distance
-        #         if self.vertexCost[eachVertexID]:
-        #             min = self.vertexCost[eachVertexID]
+    #     #what happens if node is not found?
+    #     while found == 0:                                   #loop till destination node is completed
+    #         selected = self.findMinID()                     #find unfinished node with shortest distance
 
-        return int(sourceNodeID) - int(destinationNodeID)
+
+    #     return int(sourceNodeID) - int(destinationNodeID)
     
 
 

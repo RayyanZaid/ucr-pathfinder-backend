@@ -186,7 +186,7 @@ class Navigation:
 
 
         minLength = float('inf')
-        # minTime = float('inf')
+        minTime = float('inf')
         minNodes = []
         minEdges = []
         for eachDestinationNodeID in destinationNodeIDs:
@@ -195,7 +195,7 @@ class Navigation:
 
             if length < minLength:
                 minLength = length
-                # minTime = 0 # CHANGE THIS TO FORMULA length --> time
+                minTime = 0 # CHANGE THIS TO FORMULA length --> time
                 minNodes = nodes
                 minEdges = edges
                 
@@ -203,8 +203,8 @@ class Navigation:
 
         navigationDictionary['nodes'] = minNodes
         navigationDictionary['edges'] = minEdges
-        # navigationDictionary['length'] = minLength
-        # navigationDictionary['time'] = minTime
+        navigationDictionary['length'] = minLength
+        navigationDictionary['time'] = minTime
         
         return navigationDictionary
 

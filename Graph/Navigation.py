@@ -20,7 +20,6 @@ class Navigation:
         self.location : list[int] = location
         self.destinationBuildingName : str = destinationBuildingName
 
-        self.nodeIdToObject = ucr_graph.nodeIdToObject
         self.closestNodeIdToUser : str
 
 
@@ -34,7 +33,7 @@ class Navigation:
         closestNodeID : str = None
         closestNodeDistance : float = float('inf')
 
-        for nodeID, nodeObject in self.nodeIdToObject.items():
+        for nodeID, nodeObject in ucr_graph.nodeIdToObject.items():
 
 
             coord1 = (self.location[0], self.location[1]) #needs to be in the format (lat,long)
@@ -96,7 +95,10 @@ class Navigation:
         return adjacents
     
     def getDistance(self, cur : str, adj : str):
-        for edge in ucr_graph.nodeIdToObject(cur).edges:
+        
+        # what you had before: 
+        edges = ucr_graph.nodeIdToObject[cur].edges
+        for edge in  edges:
             if adj == edge.n1.nodeID or adj == edge.n2.nodeID:
                 return edge.length
         print("getEdgeDistance could not find the edge")
@@ -217,5 +219,8 @@ if __name__ == "__main__":
 
     navigationObject.setBuildingNodes()
     print(navigationObject.destinationNodeIDs == ['9', '12'])
+
+
+    navigationObject.shortestPathAlgorithm('10' , '12')
     
     

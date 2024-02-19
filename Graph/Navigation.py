@@ -5,7 +5,7 @@ from Graph import Graph
 from Node import NodeType
 
 
-ucr_graph : Graph = Graph("./Experimenting/GoogleEarth/finishedSRC.kml")
+ucr_graph : Graph = Graph("Graph/UCR_PathFinder_Coordinates.kml")
 ucr_graph.createNodes()
 ucr_graph.createEdges()
 
@@ -61,7 +61,7 @@ class Navigation:
         buildingNodeIDs : list[str] = []
 
 
-        for nodeID, nodeObject in self.nodeIdToObject.items():
+        for nodeID, nodeObject in ucr_graph.nodeIdToObject.items():
 
             if nodeObject.type == NodeType.BUILDING:
 
@@ -173,10 +173,10 @@ class Navigation:
 
     def getShortestPathNodesAndEdges(self) -> dict[str , list]:
 
-        pathDictionary = {
+        navigationDictionary = {
 
-            "node" : [],
-            "edge" : [],
+            "nodes" : [],
+            "edges" : [],
 
         }
 
@@ -186,15 +186,27 @@ class Navigation:
 
 
         minLength = float('inf')
+        minTime = float('inf')
+        minNodes = []
+        minEdges = []
         for eachDestinationNodeID in destinationNodeIDs:
 
-            length = self.shortestPathAlgorithm(sourceNodeID, eachDestinationNodeID)
+            nodes, edges, length = self.shortestPathAlgorithm(sourceNodeID, eachDestinationNodeID)
 
             if length < minLength:
                 minLength = length
+                minTime = 0 # CHANGE THIS TO FORMULA length --> time
+                minNodes = nodes
+                minEdges = edges
+                
 
 
-        return pathDictionary
+        navigationDictionary['nodes'] = minNodes
+        navigationDictionary['edges'] = minEdges
+        navigationDictionary['length'] = minLength
+        navigationDictionary['time'] = minTime
+        
+        return navigationDictionary
 
 
 if __name__ == "__main__":
@@ -221,6 +233,6 @@ if __name__ == "__main__":
     print(navigationObject.destinationNodeIDs == ['9', '12'])
 
 
-    navigationObject.shortestPathAlgorithm('10' , '12')
+    navigationDictionary = navigationObject.getShortestPathNodesAndEdges()
     
     

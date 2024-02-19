@@ -6,6 +6,7 @@ app = Flask(__name__)
 CORS(app)
 
 from ScheduleScreen import inputScheduleFunctions
+from Graph.Navigation import Navigation
 
 @app.route('/upload', methods=['POST'])
 def uploadSchedule():
@@ -60,6 +61,18 @@ def getShortestPath():
     if request.method == "GET":
 
         uid = request.args.get("uid")
+
+
+
+        userLocation = [33.975931, -117.329059, 0.0] 
+        destinationBuildingName = "Materials Sci and Engineering" 
+
+        navigationObject : Navigation = Navigation(userLocation, destinationBuildingName)
+
+
+        navigationDictionary = navigationObject.getShortestPathNodesAndEdges()
+        
+
 
         
         nodes = [

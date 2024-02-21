@@ -51,7 +51,7 @@ def getScheduleInfo():
 
 
 
-
+from Graph.Navigation import Navigation
 
 @app.route('/getShortestPath', methods = ['GET'])
 
@@ -63,64 +63,70 @@ def getShortestPath():
 
 
 
-        userLocation = [33.975931, -117.329059, 0.0] 
+        	# <longitude>-117.3286881329295</longitude>
+			# 	<latitude>33.97571667778362</latitude>
+			# 	<altitude>317.4348304680136</altitude>
+        userLocation30 = [33.97571667778362, -117.3286881329295,317.4348304680136] 
+
+        userLocation31 = [33.97574694711781, -117.3289767658347,329.8933058297193] 
         destinationBuildingName = "Materials Sci and Engineering" 
 
-        # navigationObject : Navigation = Navigation(userLocation, destinationBuildingName)
+        navigationObject : Navigation = Navigation(userLocation31, destinationBuildingName)
 
-
-        # navigationDictionary = navigationObject.getShortestPathNodesAndEdges()
+        navigationObject.setClosestNodeToUser()
+        navigationObject.setBuildingNodes()
+        navigationDictionary = navigationObject.getShortestPathNodesAndEdges()
         
 
-        navigationDictionary = {
+        # navigationDictionary = {
 
-            'nodes' : [
-            {
-                "name" : 'START LOCATION',
-                "location" : ['33.9772220292684', '-117.3288839729353', '319.041168566382']
-            },
-            {
-                "name" : 'INTERSECTION',
-                "location": ['33.97722599505837', '-117.327048181778', '323.2461087977744']
-            },
+        #     'nodes' : [
+        #     {
+        #         "name" : 'START LOCATION',
+        #         "location" : ['33.9772220292684', '-117.3288839729353', '319.041168566382']
+        #     },
+        #     {
+        #         "name" : 'INTERSECTION',
+        #         "location": ['33.97722599505837', '-117.327048181778', '323.2461087977744']
+        #     },
 
-            {
-                "name" : 'INTERSECTION',
-                "location" : ['33.97622239025886', '-117.3270718964966', '319.2197948933198']
-            },
+        #     {
+        #         "name" : 'INTERSECTION',
+        #         "location" : ['33.97622239025886', '-117.3270718964966', '319.2197948933198']
+        #     },
             
-            {
-                 "name" : 'Materials Sci and Engineering',
-                 "location": ['33.97622378123113', '-117.3273110476977', '333.6064893163547']
-            }
-        ],
+        #     {
+        #          "name" : 'Materials Sci and Engineering',
+        #          "location": ['33.97622378123113', '-117.3273110476977', '333.6064893163547']
+        #     }
+        # ],
         
-        'edges' : [
+        # 'edges' : [
 
-            {
-                "arrayOfCoordinates" : [[33.97722238313204, -117.3288843282884] , [33.97722693465821, -117.3270470095061]],
+        #     {
+        #         "arrayOfCoordinates" : [[33.97722238313204, -117.3288843282884] , [33.97722693465821, -117.3270470095061]],
 
-            }, 
+        #     }, 
             
-            {
-                "arrayOfCoordinates" : [[33.97722684480606, -117.3270457771456], [33.97666268449692, -117.3270477321467], [33.9766302339203, -117.3270697906512], [33.97622268242515, -117.3270711398879]],
+        #     {
+        #         "arrayOfCoordinates" : [[33.97722684480606, -117.3270457771456], [33.97666268449692, -117.3270477321467], [33.9766302339203, -117.3270697906512], [33.97622268242515, -117.3270711398879]],
     
-            },
+        #     },
 
-            {
-                "arrayOfCoordinates" : [[33.97622391252066, -117.3273108312102], [33.97622285790032, -117.3270715326373]],
+        #     {
+        #         "arrayOfCoordinates" : [[33.97622391252066, -117.3273108312102], [33.97622285790032, -117.3270715326373]],
           
-            },   
+        #     },   
         
-        ],
+        # ],
 
-        'totalTime' : 3.45,
+        # 'totalTime' : 3.45,
 
-        'totalLength' : 400
+        # 'totalLength' : 400
 
 
 
-        }
+        # }
         
         
 

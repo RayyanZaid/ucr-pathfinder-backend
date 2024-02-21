@@ -2,9 +2,9 @@ import xml.etree.ElementTree as ET
 import re
 
 
-from Node import Node
+from Graph.Node import Node, AutomateNodeCreation
 from geopy import distance
-from Node import AutomateNodeCreation
+
 
 
 MPH_WALKING_SPEED = 3

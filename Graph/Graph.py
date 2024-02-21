@@ -1,5 +1,7 @@
-from Node import Node, AutomateNodeCreation
-from Edge import Edge, AutomateEdgeCreation
+
+
+from Graph.Node import Node, AutomateNodeCreation
+from Graph.Edge import Edge, AutomateEdgeCreation
 
 
 class Graph:

@@ -1,7 +1,8 @@
 import copy
 from geopy import distance
-from Graph import Graph
-from Node import NodeType
+from Graph.Graph import Graph
+from Graph.Node import NodeType, Node
+from Graph.Edge import Edge
 
 MPH_WALKING_SPEED = 3
 MILE_TO_FEET = 5280
@@ -11,6 +12,7 @@ FEET_PER_MINUTE = (MPH_WALKING_SPEED * MILE_TO_FEET) / MINUTES_IN_HOUR
 ucr_graph : Graph = Graph("Graph/UCR_PathFinder_Coordinates.kml")
 ucr_graph.createNodes()
 ucr_graph.createEdges()
+
 
 
 class Navigation:
@@ -27,6 +29,9 @@ class Navigation:
         self.finished = list[str]
         self.current = list[str]
         self.pathToDestination = list[str]
+        self.navigationDictionary =  {
+
+        }
 
     def setClosestNodeToUser(self):
         closestNodeID : str = None
@@ -159,12 +164,8 @@ class Navigation:
         return self.totalCost[destinationNodeID], self.vertexPaths[destinationNodeID]
     
     def getShortestPathNodesAndEdges(self) -> dict[str , list]:
-        navigationDictionary = {
-            "nodes" : [],
-            "edges" : [],
-            "length" : int,
-            "time" : float
-        }
+
+        
 
         sourceNodeID = self.sourceNodeID
         destinationNodeIDs = self.destinationNodeIDs
@@ -182,37 +183,51 @@ class Navigation:
                 minNodes = nodes
                 minEdges = self.findEdges(minNodes)
                 
-        navigationDictionary['nodes'] = minNodes
-        navigationDictionary['edges'] = minEdges
-        navigationDictionary['length'] = minLength
-        navigationDictionary['time'] = minTime
+        self.navigationDictionary['nodes'] = minNodes
+        self.navigationDictionary['edges'] = minEdges
+        self.navigationDictionary['totalLength'] = minLength
+        self.navigationDictionary['totalTime'] = minTime
         
-        return navigationDictionary
-
-if __name__ == "__main__":
-
-    # Testing
-    
-    userLocation = [33.975931, -117.329059, 0.0] 
-    destinationBuildingName = "Materials Sci and Engineering"
-    navigationObject : Navigation = Navigation(userLocation, destinationBuildingName)
-
-    navigationObject.setClosestNodeToUser() # should be 10
-
-    print(navigationObject.sourceNodeID == '10')
-
-    
-
-    userLocation = [33.975948, -117.327881, 0.0]
-    navigationObject : Navigation = Navigation(userLocation , destinationBuildingName)
-    navigationObject.setClosestNodeToUser() # Should be 11
-    print(navigationObject.sourceNodeID == '11')
 
 
-    navigationObject.setBuildingNodes()
-    print(navigationObject.destinationNodeIDs == ['9', '12'])
+        nodesArray  = []
+        edgesArray = []
 
 
-    navigationDictionary = navigationObject.getShortestPathNodesAndEdges()
+   
+
+        for eachNodeID in self.navigationDictionary['nodes']:
+            
+
+            nodeObject : Node = ucr_graph.nodeIdToObject[eachNodeID]
+
+            nodeDictionary = {
+                "name" : nodeObject.name,
+                "location" : nodeObject.location
+            }
+
+            nodesArray.append(nodeDictionary)
+
+
+        for eachEdge in self.navigationDictionary['edges']:
+
+            eachEdge : Edge = eachEdge
+
+            edgeDictionary = {
+                "arrayOfCoordinates" : eachEdge.arrayOfCoordinates
+            }
+
+            edgesArray.append(edgeDictionary)
+
+        
+        self.navigationDictionary['nodes'] = nodesArray
+        self.navigationDictionary['edges'] = edgesArray
+
+
+        return self.navigationDictionary
+
+
+
+
     
     

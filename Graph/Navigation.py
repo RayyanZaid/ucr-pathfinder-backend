@@ -108,7 +108,7 @@ class Navigation:
                 if newDist < self.totalCost[each]: # if current node total cost plus edge to neighbor node is less than that neighbor nodes total cost
                     self.totalCost[each] = newDist # update distance of neighbor
                     self.vertexPaths[each] = self.vertexPaths[id]
-                    self.vertexPaths[each].append(id) # update path of neighbor
+                    self.vertexPaths[each].append(each) # update path of neighbor
             else:
                 cost = self.totalCost[id] + self.getDistance(id, each)
                 path = copy.copy(self.vertexPaths[id])

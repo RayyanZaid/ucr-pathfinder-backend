@@ -57,24 +57,31 @@ from Graph.Navigation import Navigation
 
 def getShortestPath():
 
+
+    # userLocation2 = [33.97898832695682, -117.3281625439988, 336.1064619679466]
+		
+    # userLocation3 = [33.97933637566715, -117.3274747670374, 324.056714825594]
+    # userLocation27 = [33.97496349102106, -117.3276715484908,322.0736351996588]
+    # userLocation30 = [33.97571667778362, -117.3286881329295,317.4348304680136] 
+
+    # userLocation31 = [33.97574694711781, -117.3289767658347,329.8933058297193] 
+    # userLocation37 = [33.97488141666391, -117.3286340179911,318.9579109074609]
+
     if request.method == "GET":
 
         uid = request.args.get("uid")
 
+        latitude = request.args.get("latitude")
+        longitude = request.args.get("longitude")
+        altitude = request.args.get("altitude")
 
-  
-        userLocation2 = [33.97898832695682, -117.3281625439988, 336.1064619679466]
-		
-        userLocation3 = [33.97933637566715, -117.3274747670374, 324.056714825594]
-        userLocation27 = [33.97496349102106, -117.3276715484908,322.0736351996588]
-        userLocation30 = [33.97571667778362, -117.3286881329295,317.4348304680136] 
+        userLocation = [latitude, longitude, altitude]
+        destinationBuildingName = request.args.get("classBuildingName")     
+        
+        
+   
 
-        userLocation31 = [33.97574694711781, -117.3289767658347,329.8933058297193] 
-        userLocation37 = [33.97488141666391, -117.3286340179911,318.9579109074609]
-        destinationBuildingName = "University Lecture Hall (UNLH 1000)" 
-        destinationBuildingName = "Materials Sci and Engineering"
-
-        navigationObject : Navigation = Navigation(userLocation37, destinationBuildingName)
+        navigationObject : Navigation = Navigation(userLocation, destinationBuildingName)
 
         navigationObject.setClosestNodeToUser()
         navigationObject.setBuildingNodes()

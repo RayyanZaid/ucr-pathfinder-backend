@@ -212,9 +212,11 @@ class Navigation:
         for eachEdge in self.navigationDictionary['edges']:
 
             eachEdge : Edge = eachEdge
-
+            
             edgeDictionary = {
-                "arrayOfCoordinates" : eachEdge.arrayOfCoordinates
+                "arrayOfCoordinates" : eachEdge.arrayOfCoordinates,
+                "time" : eachEdge.time,
+                "length" : eachEdge.length
             }
 
             edgesArray.append(edgeDictionary)

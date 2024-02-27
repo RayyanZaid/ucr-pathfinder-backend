@@ -82,20 +82,20 @@ class Navigation:
         return adjacents
     
     def getDistance(self, cur : str, adj : str):
-        edges = ucr_graph.nodeIdToObject[cur].edges
-        for edge in  edges:
+        edges = copy.copy(ucr_graph.nodeIdToObject[cur].edges)
+        for edge in edges:
             if adj == edge.n1.nodeID or adj == edge.n2.nodeID:
                 return edge.length
         print("getEdgeDistance could not find the edge")
         return 1
 
     def findMinID(self):
-        min = self.totalCost[self.current[0]]               #initialize min as cost of first node in current[]
-        id = self.current[0]
+        min = copy.copy(self.totalCost[self.current[0]])               #initialize min as cost of first node in current[]
+        id = copy.copy(self.current[0])
         for eachVertexID in self.current:                    #loop through all id's in cureent to find the one with min distance
             if self.totalCost[eachVertexID] < min:
-                min = self.totalCost[eachVertexID]
-                id = eachVertexID
+                min = copy.copy(self.totalCost[eachVertexID])
+                id = copy.copy(eachVertexID)
         return id
     
     def calculate(self, id : str): # dijkstra visit
@@ -107,7 +107,7 @@ class Navigation:
                 newDist = self.getDistance(id, each) + self.totalCost[id]
                 if newDist < self.totalCost[each]: # if current node total cost plus edge to neighbor node is less than that neighbor nodes total cost
                     self.totalCost[each] = newDist # update distance of neighbor
-                    self.vertexPaths[each] = self.vertexPaths[id]
+                    self.vertexPaths[each] = copy.copy(self.vertexPaths[id])
                     self.vertexPaths[each].append(each) # update path of neighbor
             else:
                 cost = self.totalCost[id] + self.getDistance(id, each)
@@ -164,8 +164,6 @@ class Navigation:
         return self.totalCost[destinationNodeID], self.vertexPaths[destinationNodeID]
     
     def getShortestPathNodesAndEdges(self) -> dict[str , list]:
-
-        
 
         sourceNodeID = self.sourceNodeID
         destinationNodeIDs = self.destinationNodeIDs

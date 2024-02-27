@@ -33,12 +33,8 @@ def getSchedule(uid):
         tempScheduleDictionary = orderByTime(tempScheduleDictionary)
         scheduleDictionaryArray.append(tempScheduleDictionary)
 
-    
 
-    todaysDayNumber = datetime.today().weekday()
-
-    return scheduleDictionaryArray, todaysDayNumber
-
+    return scheduleDictionaryArray
 
 # 0 -- Monday
 # 1 -- Tuesday

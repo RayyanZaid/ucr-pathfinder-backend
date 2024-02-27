@@ -56,6 +56,26 @@ def getScheduleInfo():
 
 
 
+@app.route('/getNextClass' , methods = ['GET'])
+
+def getNextClass():
+
+    # MOCK Next Class
+
+    if request.method == "GET":
+        
+        
+        uid = request.args.get('uid')
+
+        print(f"User with uid {uid} is requesting to get their next class")
+
+
+        scheduleDictionaryArray = displayScheduleFunctions.getSchedule(uid=uid)
+
+        mockNextClass = scheduleDictionaryArray[3][0]
+        mockNextClass["locationInfo"]["buildingName"] = "Skye Hall"
+        return jsonify({'message' : "Schedule successfully recieved" , "nextClass" : mockNextClass}) , 200
+    
 
 
 from Graph.Navigation import Navigation
@@ -83,12 +103,12 @@ def getShortestPath():
         altitude = request.args.get("altitude")
 
         userLocation = [latitude, longitude, altitude]
-        # destinationBuildingName = request.args.get("classBuildingName")     
+        destinationBuildingName = request.args.get("classBuildingName")     
         
-        destinationBuildingName = "Materials Sci and Engineering"
+        # destinationBuildingName = "Materials Sci and Engineering"
    
 
-        navigationObject : Navigation = Navigation(userLocation37, destinationBuildingName)
+        navigationObject : Navigation = Navigation(userLocation, destinationBuildingName)
 
         navigationObject.setClosestNodeToUser()
         navigationObject.setBuildingNodes()
@@ -122,17 +142,20 @@ def getShortestPath():
 
         #     {
         #         "arrayOfCoordinates" : [[33.97722238313204, -117.3288843282884] , [33.97722693465821, -117.3270470095061]],
-
+        #         "time" : 20
+        #         "length" : 10
         #     }, 
             
         #     {
         #         "arrayOfCoordinates" : [[33.97722684480606, -117.3270457771456], [33.97666268449692, -117.3270477321467], [33.9766302339203, -117.3270697906512], [33.97622268242515, -117.3270711398879]],
-    
+        #           "time" : 20
+        #           "length" : 10
         #     },
 
         #     {
         #         "arrayOfCoordinates" : [[33.97622391252066, -117.3273108312102], [33.97622285790032, -117.3270715326373]],
-          
+        #         "time" : 20
+        #         "length" : 10          
         #     },   
         
         # ],

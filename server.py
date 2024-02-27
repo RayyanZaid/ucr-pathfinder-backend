@@ -11,6 +11,8 @@ from ScheduleScreen import inputScheduleFunctions
 def uploadSchedule():
 
 
+    
+
     if 'file' not in request.files:
         return jsonify({'message': 'No file part in the request'}), 400
 
@@ -21,7 +23,8 @@ def uploadSchedule():
     uid : str = request.form['uid']
 
 
-
+    print(f"User with uid {uid} is requesting to upload their schedule")
+    
     # Start
     
     file_content = file.read()
@@ -39,13 +42,17 @@ from ScheduleScreen import displayScheduleFunctions
 def getScheduleInfo():
 
     if request.method == "GET":
-
-        print("YAY")
+        
+        
         uid = request.args.get('uid')
-        scheduleDictionaryArray, currentDay = displayScheduleFunctions.getSchedule(uid=uid)
+
+        print(f"User with uid {uid} is requesting to display their schedule")
+
+
+        scheduleDictionaryArray = displayScheduleFunctions.getSchedule(uid=uid)
 
         
-        return jsonify({'message' : "Schedule successfully recieved" , "scheduleDictionaryArray" : scheduleDictionaryArray, 'currentDay' : currentDay}) , 200
+        return jsonify({'message' : "Schedule successfully recieved" , "scheduleDictionaryArray" : scheduleDictionaryArray}) , 200
 
 
 
@@ -65,7 +72,7 @@ def getShortestPath():
     # userLocation30 = [33.97571667778362, -117.3286881329295,317.4348304680136] 
 
     # userLocation31 = [33.97574694711781, -117.3289767658347,329.8933058297193] 
-    # userLocation37 = [33.97488141666391, -117.3286340179911,318.9579109074609]
+    userLocation37 = [33.97488141666391, -117.3286340179911,318.9579109074609]
 
     if request.method == "GET":
 
@@ -76,12 +83,12 @@ def getShortestPath():
         altitude = request.args.get("altitude")
 
         userLocation = [latitude, longitude, altitude]
-        destinationBuildingName = request.args.get("classBuildingName")     
+        # destinationBuildingName = request.args.get("classBuildingName")     
         
-        
+        destinationBuildingName = "Materials Sci and Engineering"
    
 
-        navigationObject : Navigation = Navigation(userLocation, destinationBuildingName)
+        navigationObject : Navigation = Navigation(userLocation37, destinationBuildingName)
 
         navigationObject.setClosestNodeToUser()
         navigationObject.setBuildingNodes()

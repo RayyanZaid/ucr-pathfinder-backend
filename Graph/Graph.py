@@ -1,5 +1,7 @@
-from Node import Node, AutomateNodeCreation
-from Edge import Edge, AutomateEdgeCreation
+
+
+from Graph.Node import Node, AutomateNodeCreation
+from Graph.Edge import Edge, AutomateEdgeCreation
 
 
 class Graph:
@@ -55,18 +57,5 @@ class Graph:
             self.nodeIdToObject[nodeId2].addEdge(eachEdge)
 
     
-
-# Testing
-            
-
-if __name__ == '__main__':
-
-    ucr_graph : Graph = Graph("./Experimenting/GoogleEarth/finishedSRC.kml")
-
-    ucr_graph.createNodes()
-
-    ucr_graph.createEdges()
-
-    print()
 
     

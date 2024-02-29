@@ -73,7 +73,7 @@ def getNextClass():
         scheduleDictionaryArray = displayScheduleFunctions.getSchedule(uid=uid)
 
         mockNextClass = scheduleDictionaryArray[3][0]
-        mockNextClass["locationInfo"]["buildingName"] = "Skye Hall"
+        mockNextClass["locationInfo"]["buildingName"] = "Student Success Center"
         return jsonify({'message' : "Schedule successfully recieved" , "nextClass" : mockNextClass}) , 200
     
 
@@ -85,7 +85,7 @@ from Graph.Navigation import Navigation
 def getShortestPath():
 
 
-    # userLocation2 = [33.97898832695682, -117.3281625439988, 336.1064619679466]
+    userLocation2 = [33.97898832695682, -117.3281625439988, 336.1064619679466]
 		
     # userLocation3 = [33.97933637566715, -117.3274747670374, 324.056714825594]
     # userLocation27 = [33.97496349102106, -117.3276715484908,322.0736351996588]
@@ -93,7 +93,9 @@ def getShortestPath():
 
     # userLocation31 = [33.97574694711781, -117.3289767658347,329.8933058297193] 
     userLocation37 = [33.97488141666391, -117.3286340179911,318.9579109074609]
+    userLocation56 = [33.97304235807492,-117.3289763431564,325.5321034647867]
 
+    userLocation49 = [33.97333329408798,-117.3277204388097,322.828737781892]
     if request.method == "GET":
 
         uid = request.args.get("uid")
@@ -105,10 +107,9 @@ def getShortestPath():
         userLocation = [latitude, longitude, altitude]
         destinationBuildingName = request.args.get("classBuildingName")     
         
-        # destinationBuildingName = "Materials Sci and Engineering"
    
 
-        navigationObject : Navigation = Navigation(userLocation, destinationBuildingName)
+        navigationObject : Navigation = Navigation(userLocation56, destinationBuildingName)
 
         navigationObject.setClosestNodeToUser()
         navigationObject.setBuildingNodes()

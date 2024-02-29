@@ -20,15 +20,19 @@ class Edge:
         self.n1NodeID = n1.nodeID
         self.n2NodeID = n2.nodeID
 
-        self.length : int
+        self.length : int = 0
         self.time : float
         
         self.arrayOfCoordinates = arrayOfCoordinates
 
     def setDistance(self):
-        coord1 = (self.n1.location[0], self.n1.location[1]) #needs to be in the format (lat,long)
-        coord2 = (self.n2.location[0], self.n2.location[1])
-        self.length = distance.distance(coord1, coord2, ellipsoid='WGS-84').feet
+
+        
+        for i in range(len(self.arrayOfCoordinates)-1):
+            
+            coord1 = (self.arrayOfCoordinates[i][0], self.arrayOfCoordinates[i][1]) #needs to be in the format (lat,long)
+            coord2 = (self.arrayOfCoordinates[i+1][0], self.arrayOfCoordinates[i+1][1])
+            self.length += distance.distance(coord1, coord2, ellipsoid='WGS-84').feet
 
     def setTime(self):
         

@@ -9,7 +9,7 @@ MILE_TO_FEET = 5280
 MINUTES_IN_HOUR = 60
 FEET_PER_MINUTE = (MPH_WALKING_SPEED * MILE_TO_FEET) / MINUTES_IN_HOUR
 
-ucr_graph : Graph = Graph("Graph/UCR_PathFinder_Coordinates.kml")
+ucr_graph : Graph = Graph("Graph/UCR PathFinder Coordinates.kml")
 ucr_graph.createNodes()
 ucr_graph.createEdges()
 

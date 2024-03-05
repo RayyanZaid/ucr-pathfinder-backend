@@ -55,29 +55,6 @@ def getScheduleInfo():
         return jsonify({'message' : "Schedule successfully recieved" , "scheduleDictionaryArray" : scheduleDictionaryArray}) , 200
 
 
-
-@app.route('/getNextClass' , methods = ['GET'])
-
-def getNextClass():
-
-    # MOCK Next Class
-
-    if request.method == "GET":
-        
-        
-        uid = request.args.get('uid')
-
-        print(f"User with uid {uid} is requesting to get their next class")
-
-
-        scheduleDictionaryArray = displayScheduleFunctions.getSchedule(uid=uid)
-
-        mockNextClass = scheduleDictionaryArray[3][0]
-        mockNextClass["locationInfo"]["buildingName"] = "Student Success Center"
-        return jsonify({'message' : "Schedule successfully recieved" , "nextClass" : mockNextClass}) , 200
-    
-
-
 from Graph.Navigation import Navigation
 
 @app.route('/getShortestPath', methods = ['GET'])

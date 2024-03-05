@@ -1,9 +1,37 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 
-import time
+
 app = Flask(__name__)
 CORS(app)
+
+
+
+from Authentication.signup import create_user,send_email_verification
+
+@app.route('/signup' , methods=["POST"])
+def signup():
+
+    if 'email' not in request.form or 'password' not in request.form:
+
+        return jsonify({'message' : 'Missing information'}), 400
+
+    email = request.form['email']
+    password = request.form['password']
+
+
+    # data is either an error message or the uid
+    success , data = create_user(email,password)
+
+    if not success:
+        failureMessage = data
+        return jsonify({'message' : f'{failureMessage}'}), 200 
+    
+    uid : str = data
+    send_email_verification(uid)
+    
+    return jsonify({'message' : f'Email verification sent to {email}'}), 200  
+
 
 from ScheduleScreen import inputScheduleFunctions
 

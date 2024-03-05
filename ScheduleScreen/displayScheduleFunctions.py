@@ -5,7 +5,7 @@ from datetime import datetime
 from copy import deepcopy
 def getSchedule(uid):
 
-    uid = "rayyanzaid0401@gmail.com"
+    uid = uid
 
     doc_ref = db.collection("students").document(uid)
 

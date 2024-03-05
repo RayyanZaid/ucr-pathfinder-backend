@@ -78,7 +78,7 @@ def getScheduleInfo():
 
 
         scheduleDictionaryArray = displayScheduleFunctions.getSchedule(uid=uid)
-
+        
         
         return jsonify({'message' : "Schedule successfully recieved" , "scheduleDictionaryArray" : scheduleDictionaryArray}) , 200
 

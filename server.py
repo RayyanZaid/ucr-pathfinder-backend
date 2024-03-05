@@ -7,30 +7,30 @@ CORS(app)
 
 
 
-from Authentication.signup import create_user,send_email_verification
+from Authentication import signin
 
-@app.route('/signup' , methods=["POST"])
-def signup():
+@app.route('/getUID' , methods=["GET"])
+def getUID():
+    # Using request.args.get for GET request query parameters
+    phoneNumber = request.args.get('phoneNumber')
+    if not phoneNumber:
+        return jsonify({'message': 'Missing phone number'}), 400
 
-    if 'email' not in request.form or 'password' not in request.form:
-
-        return jsonify({'message' : 'Missing information'}), 400
-
-    email = request.form['email']
-    password = request.form['password']
-
-
-    # data is either an error message or the uid
-    success , data = create_user(email,password)
-
-    if not success:
-        failureMessage = data
-        return jsonify({'message' : f'{failureMessage}'}), 200 
+    phoneNumber = "+1" + phoneNumber
+    # Assuming signin.getUID is a function that exists and works correctly
+    success, data = signin.getUID(phoneNumber)
     
-    uid : str = data
-    send_email_verification(uid)
+    if success:
+        uid = data  # Assuming you do something with uid here
+        return jsonify({'uid': uid}), 200
+    else:
+        message = data
+        return jsonify({'message': message}), 200
+        
+
     
-    return jsonify({'message' : f'Email verification sent to {email}'}), 200  
+    
+    return jsonify({'message' : f'Got UID {uid} from user with phone number {phoneNumber}'}), 200  
 
 
 from ScheduleScreen import inputScheduleFunctions

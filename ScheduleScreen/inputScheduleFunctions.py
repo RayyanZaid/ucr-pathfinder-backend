@@ -103,6 +103,6 @@ def inputSchedule(userID : str , file_content : str):
     # course : Course = Course("COMPILER DESIGN", "CS 152", "Zhao, Zhijia", locationInfo, timeInfo)
 
     # schedule = [course, course]  
-    userID = "rayyanzaid0401@gmail.com" 
+    userID = userID
     saveScheduleToFirebase(userID=userID, schedule=schedule)
 

@@ -1,9 +1,37 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 
-import time
+
 app = Flask(__name__)
 CORS(app)
+
+
+
+from Authentication import signin
+
+@app.route('/getUID' , methods=["GET"])
+def getUID():
+    # Using request.args.get for GET request query parameters
+    phoneNumber = request.args.get('phoneNumber')
+    if not phoneNumber:
+        return jsonify({'message': 'Missing phone number'}), 400
+
+    phoneNumber = "+1" + phoneNumber
+    # Assuming signin.getUID is a function that exists and works correctly
+    success, data = signin.getUID(phoneNumber)
+    
+    if success:
+        uid = data  # Assuming you do something with uid here
+        return jsonify({'uid': uid}), 200
+    else:
+        message = data
+        return jsonify({'message': message}), 200
+        
+
+    
+    
+    return jsonify({'message' : f'Got UID {uid} from user with phone number {phoneNumber}'}), 200  
+
 
 from ScheduleScreen import inputScheduleFunctions
 

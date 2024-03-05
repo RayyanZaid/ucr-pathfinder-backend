@@ -65,6 +65,23 @@ def uploadSchedule():
 
 from ScheduleScreen import displayScheduleFunctions
 
+from ScheduleScreen import deleteScheduleFunctions
+
+@app.route('/removeSchedule', methods=['GET'])
+def removeSchedule():
+    if request.method == "GET":
+        
+        
+        uid = request.args.get('uid')
+
+        print(f"User with uid {uid} is requesting to delete their schedule")
+
+
+        deleteScheduleFunctions.deleteSchedule(uid)
+
+        return jsonify({'message': 'Schedule successfully deleted'}), 200
+    
+
 @app.route('/displaySchedule', methods= ['GET'])
 
 def getScheduleInfo():
@@ -78,7 +95,7 @@ def getScheduleInfo():
 
 
         scheduleDictionaryArray = displayScheduleFunctions.getSchedule(uid=uid)
-        
+
         
         return jsonify({'message' : "Schedule successfully recieved" , "scheduleDictionaryArray" : scheduleDictionaryArray}) , 200
 

@@ -96,8 +96,16 @@ def getScheduleInfo():
 
         scheduleDictionaryArray = displayScheduleFunctions.getSchedule(uid=uid)
 
+        validSchedule = False
+        for eachDay in scheduleDictionaryArray:
+            if len(eachDay) >= 1:
+                validSchedule = True
+                break
         
-        return jsonify({'message' : "Schedule successfully recieved" , "scheduleDictionaryArray" : scheduleDictionaryArray}) , 200
+        if validSchedule:
+            return jsonify({'message' : "Schedule successfully recieved" , "scheduleDictionaryArray" : scheduleDictionaryArray}) , 200
+        else:
+            return jsonify({'message' : "No schedule exists" , "scheduleDictionaryArray" : None}) , 400
 
 
 from Graph.Navigation import Navigation

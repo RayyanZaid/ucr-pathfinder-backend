@@ -141,7 +141,7 @@ def getShortestPath():
         
    
 
-        navigationObject : Navigation = Navigation(userLocation98, destinationBuildingName)
+        navigationObject : Navigation = Navigation(userLocation, destinationBuildingName)
 
         navigationObject.setClosestNodeToUser()
         navigationObject.setBuildingNodes()

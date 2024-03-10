@@ -48,11 +48,13 @@ class Node:
         
 class BuildingNode(Node):
     
-    def __init__(self, name: str, nodeID: str, location: list, type: NodeType):
+    def __init__(self, name: str, nodeID: str, location: list, type: NodeType, buildingName : str):
 
         super().__init__(name, nodeID, location, type)
         
-        self.roomNodeIDs : list[str]
+        self.buildingName = buildingName
+        self.roomNodeIDs : list[str] = []
+        
 
     def addRoom(self,nodeID : str):
 
@@ -124,12 +126,27 @@ class AutomateNodeCreation:
 
                     return {
 
+                        "nodeName" : f"{buildingName} {roomName}",
                         "roomName" : roomName,
                         "buildingName" : buildingName,
-                        "nodeID" : nodeID
+                        "nodeID" : nodeID,
+                        "nodeType" : nodeType
                     }
 
 
+                elif key == "BUILDING":
+
+                    buildingName = match.group(1)
+                    nodeName = buildingName
+                    nodeID = match.group(2)
+
+                    return {
+
+                    "nodeName" : nodeName,
+                    "buildingName" : buildingName,
+                    "nodeID" : nodeID,
+                    "nodeType" : nodeType
+                }
 
                 else:
                     # For other types, extract name and markerID
@@ -159,6 +176,8 @@ class AutomateNodeCreation:
 
 
         nodes : list[Node] = []
+
+        buildingNameToRooms : dict[str, list[str]] = dict()
 
         # Find all placemarks in the KML file
         for placemark in root.findall('.//kml:Placemark', ns):
@@ -220,9 +239,47 @@ class AutomateNodeCreation:
 
 
 
-                node = Node(name=nodeName, nodeID=nodeID, location=nodeLocation, type=nodeType)
+                node : Node
+
+
+                if nodeType == NodeType.BUILDING:
+
+                    buildingName = nodeInformation["buildingName"]
+                    node = BuildingNode(name=nodeName, nodeID=nodeID, location=nodeLocation, type=nodeType, buildingName=buildingName)
+
+                elif nodeType == NodeType.ROOM:
+
+                    roomName = nodeInformation["roomName"]
+                    buildingName = nodeInformation["buildingName"]
+                    
+                    node = RoomNode(name=nodeName, nodeID=nodeID, location=nodeLocation, type=nodeType, roomName=roomName, buildingName=buildingName)
+
+                    if buildingName not in buildingNameToRooms:
+                        buildingNameToRooms[buildingName] = [nodeID]
+                    else:
+                        buildingNameToRooms[buildingName].append(nodeID)
+                
+                else:
+                    node = Node(name=nodeName, nodeID=nodeID, location=nodeLocation, type=nodeType)
 
                 nodes.append(node)
 
 
+
+        # Go through building nodes and add the rooms
+                
+        for eachNode in nodes:
+
+            if eachNode.type == NodeType.BUILDING:
+
+                eachNode : BuildingNode = eachNode
+
+                buildingName = eachNode.buildingName
+
+                if buildingName in buildingNameToRooms:
+
+                    for eachRoomNodeID in buildingNameToRooms[buildingName]:
+
+                        eachNode.addRoom(eachRoomNodeID)
+                
         return nodes

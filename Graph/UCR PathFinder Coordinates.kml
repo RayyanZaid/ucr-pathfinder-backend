@@ -1120,7 +1120,7 @@
 			</Point>
 		</Placemark>
 		<Placemark id="0B680DE6882F28E6D7EF">
-			<name>BUILDING_Gordon Watkins Hall_57</name>
+			<name>ROOM_1000_Gordon Watkins Hall_57</name>
 			<LookAt>
 				<longitude>-117.3289456583245</longitude>
 				<latitude>33.97316749352761</latitude>
@@ -1133,7 +1133,7 @@
 			</LookAt>
 			<styleUrl>#__managed_style_0EB99C040A2F5CA171CA</styleUrl>
 			<Point>
-				<coordinates>-117.3289708860907,33.97313817887284,326.5718111777031</coordinates>
+				<coordinates>-117.3289885510653,33.97312509666119,326.5718111777031</coordinates>
 			</Point>
 		</Placemark>
 		<Placemark id="05A1F23A692F28EAD053">
@@ -1694,7 +1694,7 @@
 			</LookAt>
 			<styleUrl>#__managed_style_0EB99C040A2F5CA171CA</styleUrl>
 			<Point>
-				<coordinates>-117.3285548076487,33.9723557685092,324.2010516790077</coordinates>
+				<coordinates>-117.3285522559023,33.97235273703787,324.2010516790077</coordinates>
 			</Point>
 		</Placemark>
 		<Placemark id="03BC9779A32F2D06692E">
@@ -2905,7 +2905,7 @@
 			</Point>
 		</Placemark>
 		<Placemark id="0EBF5EA7562F3C927A40">
-			<name>BUILDING_Physics_162</name>
+			<name>ROOM_2000_Physics_162</name>
 			<LookAt>
 				<longitude>-117.3259054086347</longitude>
 				<latitude>33.97412225698969</latitude>
@@ -3208,6 +3208,23 @@
 			<styleUrl>#__managed_style_0EB99C040A2F5CA171CA</styleUrl>
 			<Point>
 				<coordinates>-117.3273030236812,33.97553032336978,323.4462483166251</coordinates>
+			</Point>
+		</Placemark>
+		<Placemark id="0A0FC2A6E92F5D24B3DF">
+			<name>ROOM_1471_Alfred M. Boyce Hall_180</name>
+			<LookAt>
+				<longitude>-117.325076004967</longitude>
+				<latitude>33.97338274875572</latitude>
+				<altitude>332.8403833974585</altitude>
+				<heading>-0.1792360958657726</heading>
+				<tilt>2.072575894387791</tilt>
+				<gx:fovy>30</gx:fovy>
+				<range>75.37131068523195</range>
+				<altitudeMode>absolute</altitudeMode>
+			</LookAt>
+			<styleUrl>#__managed_style_0EB99C040A2F5CA171CA</styleUrl>
+			<Point>
+				<coordinates>-117.3250254433731,33.97330817234547,333.3674062700183</coordinates>
 			</Point>
 		</Placemark>
 	</Folder>
@@ -7677,6 +7694,25 @@
 			<LineString>
 				<coordinates>
 					-117.3269303937737,33.97552671492224,0 -117.327304128546,33.97553054077886,0 
+				</coordinates>
+			</LineString>
+		</Placemark>
+		<Placemark id="05DC73E60D2F5D25B7D5">
+			<name>EDGE_171_180</name>
+			<LookAt>
+				<longitude>-117.3250989467703</longitude>
+				<latitude>33.97331148479921</latitude>
+				<altitude>332.8693124083226</altitude>
+				<heading>-0.1792360607821169</heading>
+				<tilt>2.072559521548111</tilt>
+				<gx:fovy>30</gx:fovy>
+				<range>25.0284813230428</range>
+				<altitudeMode>absolute</altitudeMode>
+			</LookAt>
+			<styleUrl>#__managed_style_023C4F496E2F5CA171C7</styleUrl>
+			<LineString>
+				<coordinates>
+					-117.3250845297799,33.97330270100629,0 -117.325030773036,33.97330229276837,0 -117.3250261325285,33.97330862218791,0 
 				</coordinates>
 			</LineString>
 		</Placemark>

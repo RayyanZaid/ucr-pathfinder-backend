@@ -1,7 +1,7 @@
 import copy
 from geopy import distance
 from Graph.Graph import Graph
-from Graph.Node import NodeType, Node
+from Graph.Node import NodeType, Node, BuildingNode, RoomNode
 from Graph.Edge import Edge
 
 MPH_WALKING_SPEED = 3
@@ -17,10 +17,11 @@ ucr_graph.createEdges()
 
 class Navigation:
             # [latitude , longitude , altitude]
-    def __init__(self, location : list[float], destinationBuildingName : str) -> None:
+    def __init__(self, location : list[float], destinationBuildingName : str, roomName : str) -> None:
         
         self.location : list[int] = location
         self.destinationBuildingName : str = destinationBuildingName
+        self.roomName = roomName
         self.closestNodeIdToUser : str
         self.sourceNodeID : str
         self.destinationNodeIDs : list[str]
@@ -173,7 +174,36 @@ class Navigation:
         minEdges = []
 
         for eachDestinationNodeID in destinationNodeIDs:
-            length, nodes = self.shortestPathAlgorithm(sourceNodeID, eachDestinationNodeID) # edges
+
+            
+            
+            length : int
+            nodes : list[str]
+
+            destinationNodeObject : Node = ucr_graph.nodeIdToObject[eachDestinationNodeID]
+            if destinationNodeObject.type == NodeType.BUILDING:
+
+                destinationNodeObject : BuildingNode = destinationNodeObject
+
+                roomExists = False
+
+                for eachRoomID in destinationNodeObject.roomNodeIDs:
+
+                    roomNodeObject : RoomNode = ucr_graph.nodeIdToObject[eachRoomID]
+
+                    roomNameInBuilding : str = roomNodeObject.roomName
+
+                    if self.roomName == roomNameInBuilding:
+                        length, nodes = self.shortestPathAlgorithm(sourceNodeID, eachRoomID) # edges
+                        roomExists = True
+                
+                if not roomExists:
+                    length, nodes = self.shortestPathAlgorithm(sourceNodeID, eachDestinationNodeID) # edges
+
+
+
+            else: 
+                length, nodes = self.shortestPathAlgorithm(sourceNodeID, eachDestinationNodeID) # edges
 
             if length < minLength:
                 minLength = length

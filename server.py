@@ -138,10 +138,11 @@ def getShortestPath():
 
         userLocation = [latitude, longitude, altitude]
         destinationBuildingName = request.args.get("classBuildingName")     
+        roomName = request.args.get("roomName").strip()
         
    
 
-        navigationObject : Navigation = Navigation(userLocation, destinationBuildingName)
+        navigationObject : Navigation = Navigation(userLocation98, destinationBuildingName, roomName)
 
         navigationObject.setClosestNodeToUser()
         navigationObject.setBuildingNodes()

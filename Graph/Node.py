@@ -7,10 +7,11 @@ import re
 class NodeType(Enum):
 
     BUILDING = 1
-    INTERSECTION = 2
-    PARKING_LOT = 3
-    LIVINGAREA = 4
-    RECREATION = 5
+    ROOM = 2
+    INTERSECTION = 3
+    PARKING_LOT = 4
+    LIVINGAREA = 5
+    RECREATION = 6
 
 stringToEnum = {
     "BUILDING" : NodeType.BUILDING,
@@ -18,6 +19,7 @@ stringToEnum = {
     "PARKING_LOT" : NodeType.PARKING_LOT,
     "LIVIINGAREA" : NodeType.LIVINGAREA,
     "RECREATION" : NodeType.RECREATION,
+    "ROOM" : NodeType.ROOM
 }
 
 
@@ -40,6 +42,33 @@ class Node:
     def addEdge(self, edge):
 
         self.edges.append(edge)
+
+
+# BuildingNode and RoomNode inherit from Node
+        
+class BuildingNode(Node):
+    
+    def __init__(self, name: str, nodeID: str, location: list, type: NodeType, buildingName : str):
+
+        super().__init__(name, nodeID, location, type)
+        
+        self.buildingName = buildingName
+        self.roomNodeIDs : list[str] = []
+        
+
+    def addRoom(self,nodeID : str):
+
+        self.roomNodeIDs.append(nodeID)
+
+
+class RoomNode(Node):
+    def __init__(self, name: str, nodeID: str, location: list, type: NodeType, roomName: str, buildingName: str):
+        super().__init__(name, nodeID, location, type)
+
+        self.roomName = roomName
+        self.buildingName = buildingName
+        
+
 class AutomateNodeCreation:
 
     def __init__(self, googleEarthFilePath) -> None:
@@ -55,6 +84,9 @@ class AutomateNodeCreation:
         # Define regex patterns for each naming convention
         patterns = {
             "BUILDING": re.compile(r"^BUILDING_([^_]+)_(\d+)$"),
+
+                            # ex. ROOM_B118_Bourns Hall_178
+            "ROOM" : re.compile(r"ROOM_([^_]+)_([^_]+)_(\d+)"),
             "INTERSECTION": re.compile(r"^(\d+)$"),
             "PARKINGLOT": re.compile(r"^PARKINGLOT_([^_]+)_(\d+)$"),
             "LIVINGAREA": re.compile(r"^LIVINGAREA_([^_]+)_(\d+)$"),
@@ -84,7 +116,38 @@ class AutomateNodeCreation:
                     nodeID =  match.group(1)
                     nodeName = "INTERSECTION"
                     
-                    
+
+
+                elif key == "ROOM":
+
+                    roomName = match.group(1)
+                    buildingName = match.group(2)
+                    nodeID = match.group(3)
+
+                    return {
+
+                        "nodeName" : f"{buildingName} {roomName}",
+                        "roomName" : roomName,
+                        "buildingName" : buildingName,
+                        "nodeID" : nodeID,
+                        "nodeType" : nodeType
+                    }
+
+
+                elif key == "BUILDING":
+
+                    buildingName = match.group(1)
+                    nodeName = buildingName
+                    nodeID = match.group(2)
+
+                    return {
+
+                    "nodeName" : nodeName,
+                    "buildingName" : buildingName,
+                    "nodeID" : nodeID,
+                    "nodeType" : nodeType
+                }
+
                 else:
                     # For other types, extract name and markerID
                     nodeName = match.group(1)
@@ -113,6 +176,8 @@ class AutomateNodeCreation:
 
 
         nodes : list[Node] = []
+
+        buildingNameToRooms : dict[str, list[str]] = dict()
 
         # Find all placemarks in the KML file
         for placemark in root.findall('.//kml:Placemark', ns):
@@ -174,9 +239,47 @@ class AutomateNodeCreation:
 
 
 
-                node = Node(name=nodeName, nodeID=nodeID, location=nodeLocation, type=nodeType)
+                node : Node
+
+
+                if nodeType == NodeType.BUILDING:
+
+                    buildingName = nodeInformation["buildingName"]
+                    node = BuildingNode(name=nodeName, nodeID=nodeID, location=nodeLocation, type=nodeType, buildingName=buildingName)
+
+                elif nodeType == NodeType.ROOM:
+
+                    roomName = nodeInformation["roomName"]
+                    buildingName = nodeInformation["buildingName"]
+                    
+                    node = RoomNode(name=nodeName, nodeID=nodeID, location=nodeLocation, type=nodeType, roomName=roomName, buildingName=buildingName)
+
+                    if buildingName not in buildingNameToRooms:
+                        buildingNameToRooms[buildingName] = [nodeID]
+                    else:
+                        buildingNameToRooms[buildingName].append(nodeID)
+                
+                else:
+                    node = Node(name=nodeName, nodeID=nodeID, location=nodeLocation, type=nodeType)
 
                 nodes.append(node)
 
 
+
+        # Go through building nodes and add the rooms
+                
+        for eachNode in nodes:
+
+            if eachNode.type == NodeType.BUILDING:
+
+                eachNode : BuildingNode = eachNode
+
+                buildingName = eachNode.buildingName
+
+                if buildingName in buildingNameToRooms:
+
+                    for eachRoomNodeID in buildingNameToRooms[buildingName]:
+
+                        eachNode.addRoom(eachRoomNodeID)
+                
         return nodes

@@ -128,6 +128,7 @@ def getShortestPath():
     userLocation49 = [33.97333329408798,-117.3277204388097,322.828737781892]
 
     userLocation98 = [33.97203958907053,-117.3301287489703,321.8734107055374]
+    userLocation166 = [33.97331811546276, -117.3256545565751]
     if request.method == "GET":
 
         uid = request.args.get("uid")
@@ -142,7 +143,7 @@ def getShortestPath():
         
    
 
-        navigationObject : Navigation = Navigation(userLocation98, destinationBuildingName, roomName)
+        navigationObject : Navigation = Navigation(userLocation166, destinationBuildingName, roomName)
 
         navigationObject.setClosestNodeToUser()
         navigationObject.setBuildingNodes()

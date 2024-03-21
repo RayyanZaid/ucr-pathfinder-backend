@@ -17,11 +17,11 @@ def getUID():
         return jsonify({'message': 'Missing phone number'}), 400
 
     phoneNumber = "+1" + phoneNumber
-    # Assuming signin.getUID is a function that exists and works correctly
+
     success, data = signin.getUID(phoneNumber)
     
     if success:
-        uid = data  # Assuming you do something with uid here
+        uid = data
         return jsonify({'uid': uid}), 200
     else:
         message = data
@@ -145,7 +145,7 @@ def getShortestPath():
         
    
 
-        navigationObject : Navigation = Navigation(userLocation67_SSC, destinationBuildingName, roomName)
+        navigationObject : Navigation = Navigation(userLocation, destinationBuildingName, roomName)
 
         navigationObject.setClosestNodeToUser()
         navigationObject.setBuildingNodes()

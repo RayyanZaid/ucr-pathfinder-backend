@@ -1,6 +1,4 @@
 from firebase import db
-
-import pytz
 from datetime import datetime
 from copy import deepcopy
 def getSchedule(uid):

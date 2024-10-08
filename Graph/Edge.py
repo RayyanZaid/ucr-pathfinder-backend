@@ -6,40 +6,47 @@ from Graph.Node import Node, AutomateNodeCreation
 from geopy import distance
 
 
-
 MPH_WALKING_SPEED = 3
 MILE_TO_FEET = 5280
 MINUTES_IN_HOUR = 60
 FEET_PER_MINUTE = (MPH_WALKING_SPEED * MILE_TO_FEET) / MINUTES_IN_HOUR
 
+
 class Edge:
-    def __init__(self, n1 : Node, n2 : Node, arrayOfCoordinates = []):
+    def __init__(self, n1: Node, n2: Node, arrayOfCoordinates=[]):
         self.n1 = n1
         self.n2 = n2
 
         self.n1NodeID = n1.nodeID
         self.n2NodeID = n2.nodeID
 
-        self.length : int = 0
-        self.time : float
-        
+        self.length: int = 0
+        self.time: float
+
         self.arrayOfCoordinates = arrayOfCoordinates
 
     def setDistance(self):
 
-        
-        for i in range(len(self.arrayOfCoordinates)-1):
-            
-            coord1 = (self.arrayOfCoordinates[i][0], self.arrayOfCoordinates[i][1]) #needs to be in the format (lat,long)
-            coord2 = (self.arrayOfCoordinates[i+1][0], self.arrayOfCoordinates[i+1][1])
-            self.length += distance.distance(coord1, coord2, ellipsoid='WGS-84').feet
+        for i in range(len(self.arrayOfCoordinates) - 1):
+
+            coord1 = (
+                self.arrayOfCoordinates[i][0],
+                self.arrayOfCoordinates[i][1],
+            )  # needs to be in the format (lat,long)
+            coord2 = (
+                self.arrayOfCoordinates[i + 1][0],
+                self.arrayOfCoordinates[i + 1][1],
+            )
+            self.length += distance.distance(coord1, coord2, ellipsoid="WGS-84").feet
 
     def setTime(self):
-        
+
         self.time = self.length / FEET_PER_MINUTE
 
     def printValues(self):
-        print(f"Between {self.n1.name} {self.n1.nodeID} and {self.n2.name} {self.n2.nodeID}")
+        print(
+            f"Between {self.n1.name} {self.n1.nodeID} and {self.n2.name} {self.n2.nodeID}"
+        )
         print(f"Distance: {self.length} feet")
         print(f"Time: {self.time} minutes")
         print()
@@ -48,114 +55,85 @@ class Edge:
 class AutomateEdgeCreation:
 
     def __init__(self, googleEarthFilePath, nodeIDToNodeObject) -> None:
-        
+
         self.filePath = googleEarthFilePath
         self.nodeIDToNodeObject = nodeIDToNodeObject
-
 
     def parse_info_from_name(self, nameFromGoogleEarth) -> str:
 
         # Check for EDGE case
         if nameFromGoogleEarth.startswith("EDGE"):
 
-
             edgePattern = re.compile(r"EDGE_(\d+)_(\d+)")
 
             match = edgePattern.match(nameFromGoogleEarth)
-
 
             if match:
 
                 firstNumber = match.group(1)
                 secondNumber = match.group(2)
 
-                return {
-                    "firstNumber" : firstNumber,
-                    "secondNumber" : secondNumber
-                }
-            
-            return  'No match found.'
-        
-        return  'No match found.'
-            
-    
+                return {"firstNumber": firstNumber, "secondNumber": secondNumber}
+
+            return "No match found."
+
+        return "No match found."
+
     def createEdgesFromKml(self) -> list[Edge]:
 
-        ns = {'kml': 'http://www.opengis.net/kml/2.2'}
+        ns = {"kml": "http://www.opengis.net/kml/2.2"}
 
         tree = ET.parse(self.filePath)
         root = tree.getroot()
 
-
-
-        edges : list[Edge] = []
+        edges: list[Edge] = []
 
         # Find all placemarks in the KML file
-        for placemark in root.findall('.//kml:Placemark', ns):
-            nameFromGoogleEarth = placemark.find('kml:name', ns)
+        for placemark in root.findall(".//kml:Placemark", ns):
+            nameFromGoogleEarth = placemark.find("kml:name", ns)
             if nameFromGoogleEarth is not None:
                 nameFromGoogleEarth = nameFromGoogleEarth.text
             else:
                 nameFromGoogleEarth = "No Name"
 
-
             edgeInformation = self.parse_info_from_name(nameFromGoogleEarth)
-        
-            
-
-
 
             # Create Node object
 
-            if edgeInformation != 'No match found.':
-                
-                firstNumber = edgeInformation['firstNumber']
+            if edgeInformation != "No match found.":
 
-                secondNumber = edgeInformation['secondNumber']
+                firstNumber = edgeInformation["firstNumber"]
+
+                secondNumber = edgeInformation["secondNumber"]
 
                 # Extracting the coordinates
-                
-                coordinates = placemark.find('.//kml:coordinates', ns)
-                if coordinates is not None:
-            
-                    # print(coordinates)
 
+                coordinates = placemark.find(".//kml:coordinates", ns)
+                if coordinates is not None:
+
+                    # print(coordinates)
 
                     coord_text = coordinates.text.strip()
 
-                    arrayOfCoordinateStrings = coord_text.split(' ')
+                    arrayOfCoordinateStrings = coord_text.split(" ")
 
-
-                    
-
-                    arrayOfCoordinates : list[list[float]] = []
-
+                    arrayOfCoordinates: list[list[float]] = []
 
                     for eachString in arrayOfCoordinateStrings:
 
-                        longitude, latitude, _ = eachString.split(',')
+                        longitude, latitude, _ = eachString.split(",")
 
                         latitude = float(latitude)
                         longitude = float(longitude)
 
-                        arrayOfCoordinates.append([latitude,longitude])
+                        arrayOfCoordinates.append([latitude, longitude])
 
+                    n1: Node = self.nodeIDToNodeObject[firstNumber]
+                    n2: Node = self.nodeIDToNodeObject[secondNumber]
 
-
-
-
-
-                    n1 : Node = self.nodeIDToNodeObject[firstNumber]
-                    n2 : Node = self.nodeIDToNodeObject[secondNumber]
-
-                    edge = Edge(n1,n2, arrayOfCoordinates)
+                    edge = Edge(n1, n2, arrayOfCoordinates)
                     edge.setDistance()
                     edge.setTime()
                     edges.append(edge)
 
-
         return edges
-    
-
-                
-

@@ -1,12 +1,27 @@
-from firebase import auth, firebase_admin
+import firebase_admin
+from firebase_admin import auth
+from firebase import cred
 
-def getUID(phone):
 
+
+def createNewUser(email : str, password : str) -> str: 
+  
+    user = auth.create_user(
+            email=email,
+            email_verified=False,
+            password=password
+        )
+
+    print(f"Successfully signed in user with user id of {user.uid}")
+
+    return "Success"
+
+def signInExistingUser(email : str, password : str) -> str:
     try:
-        user = auth.get_user_by_phone_number(phone)
-        print('Successfully fetched user data: {0}'.format(user.uid))
-        return True, user.uid
-    
-    except Exception as e:
-        print(e)
-        return False,e
+        user = auth.get_user_by_email(email)
+        # I need to verify the password
+        
+        print(f"Successfully signed in user with user id of {user.uid}")
+        return "Success"
+    except:
+        return "User does not exist"

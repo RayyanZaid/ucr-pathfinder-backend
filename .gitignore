@@ -2,3 +2,4 @@ UCR_PathFinder_VirtualEnvironment
 *__pycache__
 credentials.json
 .vscode/
+ucr.pem

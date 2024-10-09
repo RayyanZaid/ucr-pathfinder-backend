@@ -8,6 +8,20 @@ CORS(app)
 
 
 from Authentication import signin
+@app.route('/signUp', methods=['POST'])
+def signinUser():
+    if request.method == "POST":
+        email = request.json.get('email')
+        password = request.json.get('password')
+
+        try:
+            signin.createNewUser(email, password)
+        except Exception as e:
+            return jsonify({'message': str(e)}), 400
+
+
+    
+    return jsonify({'message': 'User successfully created'}), 200        
 
 @app.route('/getUID' , methods=["GET"])
 def getUID():
